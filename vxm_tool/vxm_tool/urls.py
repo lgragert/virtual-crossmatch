@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from vxm_app import views
 
 urlpatterns = [
+    path('', views.vxm_home, name="home"),
+    path('glsvxm/', views.gl_string, name="glsvxm"),
+    path('macvxm/', views.multiple_allele_codes, name="macvxm"),
     path('admin/', admin.site.urls),
+    path('license/', views.license, name="license"),
 ]
