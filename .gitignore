@@ -1,0 +1,24 @@
+# Temporary and binary files
+*~
+*.py[cod]
+*.so
+*.cfg
+
+__pycache__/*
+.cache/*
+.*.swp
+*/.ipynb_checkpoints/*
+
+# Project files
+.ropeproject
+.project
+.pydevproject
+.settings
+.idea
+
+# Package files
+*.egg
+*.eggs/
+.installed.cfg
+*.egg-info
+
