@@ -35,10 +35,10 @@ def vxm_gls(donor_gl_string, donor_ethnicity, recepient_UA_list):
 	conflicts = []
 	output = gl_string_ags(donor_gl_string, donor_ethnicity)
 	
-	ags = list(output['UNOS antigens'])
+	ags = list(output['UNOS antigens']) ## returns tuple of strings
 	ags_list = []
 
-	for i in ags:
+	for i in ags: 						### converts tuple of strings to list
 		isplit = i.split(",")
 		x = isplit[0]
 		ags_list.append(x)
@@ -63,13 +63,19 @@ def vxm_gls(donor_gl_string, donor_ethnicity, recepient_UA_list):
 
 	
 
+	UA_list = []
+	for ag in recepient_UA_list:
+		if ag in UA_eq_dict.keys():
+			UA_list.append(UA_eq_dict[ag])
+		else:
+			UA_list.append([ag])	
 
 
-
+	recepient_ags = [item for sublist in UA_list for item in sublist]
 
 
 	for ag in donor_ags:
-		if ag in recepient_UA_list:
+		if ag in recepient_ags:
 			conflicts.append(ag)
 		
 			
