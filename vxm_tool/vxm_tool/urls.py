@@ -20,6 +20,7 @@ from vxm_app import views
 urlpatterns = [
     path('', views.vxm_home, name="home"),
     path('glsvxm/', views.gl_string, name="glsvxm"),
+    path('matchgls/', views.match_gl, name="matchgls"),
     path('macvxm/', views.multiple_allele_codes, name="macvxm"),
     path('admin/', admin.site.urls),
     path('license/', views.license, name="license"),

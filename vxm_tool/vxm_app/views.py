@@ -33,12 +33,16 @@ def gl_string(request):
 def multiple_allele_codes(request):
 	return render(request, 'macVxm.html')
 
-#def match_gl(request):
-	#donorTyping = request.GET['userinput1']
-	#popSpec = request.GET['userinput2']
-	#recepientAntigens = request.GET['userinput3']
-	#vxm_output = vxm_gls(donorTyping, popSpec, recepientAntigens)
-	#return render(request, vxmGls.html, {'output': vxm_output})
+def match_gl(request):
+	donorTyping = request.GET['userinput1']
+	popSpec = request.GET['userinput2']
+	recepientAntigens = request.GET['userinput3']
+	#print(type(recepientAntigens))
+	recepientAntigens = re.split(r'[;,\s]\s*' , recepientAntigens)
+
+	vxm_output = vxm_gls(donorTyping, popSpec, recepientAntigens)
+	print(vxm_output)
+	return render(request, 'vxmGlsmatch.html', {'output': vxm_output, 'output1': donorTyping, 'output2': popSpec, 'output3': recepientAntigens})
 
 
 

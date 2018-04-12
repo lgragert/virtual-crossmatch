@@ -61,8 +61,8 @@ def vxm_gls(donor_gl_string, donor_ethnicity, recepient_UA_list):
 	
 	donor_ags = ags_list + episn
 
-	print("Donor Antigens")
-	print(donor_ags)
+	#print("Donor Antigens")
+	#print(donor_ags)
 
 	UA_list = []
 	for ag in recepient_UA_list:
@@ -73,8 +73,8 @@ def vxm_gls(donor_gl_string, donor_ethnicity, recepient_UA_list):
 
 
 	recepient_ags = [item for sublist in UA_list for item in sublist]
-	print("Recepient Unacceptable Antigens")
-	print(recepient_ags)
+	#print("Recepient Unacceptable Antigens")
+	#print(recepient_ags)
 
 	for ag in donor_ags:
 		if ag in recepient_ags:
@@ -87,7 +87,7 @@ def vxm_gls(donor_gl_string, donor_ethnicity, recepient_UA_list):
 	else:
 		print("Virtual Crossmatch is positive and the overlapping antigens are following")	
 
-
+	return (donor_ags, recepient_ags, conflicts)
 
 
 
