@@ -41,7 +41,7 @@
     <h2 class="container text-danger text-center font-weight-bold mt-5 mb-5"> Donor HLA typing as NMDP Multiple Allele Codes </h2>
     
 <div> 
-    <p class="container jumbotron pt-4 pb-4 lead" > Enter Donor's HLA typing data as NMDP Multiple Allele Codes (MAC) in the text box, select the subject's race/ethnic category, and add Recepient's Unacceptable Antigens in the second text area and click on "Virtual Cross Match" to run virtual cross match. Population-specific HLA frequencies from NMDP are used to assign the most probable UNOS antigen equivalents for donor HLA typing. HLA loci supported are A, B, C, DRB1, DQB1, DRB3/4/5. </p>
+    <p class="container jumbotron pt-4 pb-4 lead" > Enter Donor's HLA typing data as NMDP Multiple Allele Codes (MAC) in the text box, select the subject's race/ethnic category, and add Recepient's Unacceptable Antigens in the second text area and click on "SUBMIT" to run virtual cross match. Population-specific HLA frequencies from NMDP are used to assign the most probable UNOS antigen equivalents for donor HLA typing. HLA loci supported are A, B, C, DRB1, DQB1, DRB3/4/5. </p>
     
     <form class="container text-center text-primary mt-5" action="{% url 'matchmac' %}" method="get">
        <textarea name = "userinput1" rows = "5" cols = "80" >A*01:AABJE A*02:HBMC B*08:NMTJ B*13:GR C*04:CYMD C*05:YDYE DRB1*04:AMR DRB1*07:GC DQB1*03:AG DQB1*03:AFYYJ </textarea> 
@@ -97,7 +97,7 @@
      </div>   
      <h4 class=" text-danger font-weight-bold mb-5 mt-5"> Enter Recepient's Unacceptable Antigens </h4>
      <div> <textarea name = "userinput3" rows = "1" cols = "80" >A2 Bw4</textarea>   </div>       
-  <input class="btn btn-dark btn-lg active mt-5" type="submit" value="Virtual Cross Match"/> </div> 
+  <input class="btn btn-danger btn-lg active mt-5" type="submit" value="SUBMIT"/> </div> 
     </form>
     <br>
     <br>

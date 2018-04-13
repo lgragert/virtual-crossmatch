@@ -41,7 +41,7 @@
     <h2 class="container text-danger text-center font-weight-bold mt-5 mb-5"> Donor HLA typing as Genotype List String </h2>
     
 <div> 
-    <p class="container jumbotron pt-4 pb-4 lead" > Enter Donor's HLA typing data as Genotype List (GL) String of IMGT/HLA alleles in the text box, select the subject's race/ethnic category, and add Recepient's Unacceptable Antigens in the second text area and click on "Virtual Cross Match" to run virtual cross match. Alleles in the GL string should be resolved to specific HLA protein field (2nd field) or fully resolved (full IMGT/HLA allele name). Protein expression specifying characters ("L", "N", "S", "Q") can be used. Characters that specify antigen recognition domain equivalents (“G”, “P”, “g") can also be used. Population-specific HLA frequencies from NMDP are used to assign the most probable UNOS antigen equivalents for donor HLA typing. HLA loci supported are A, B, C, DRB1, DQB1, DRB3/4/5. </p>
+    <p class="container jumbotron pt-4 pb-4 lead" > Enter Donor's HLA typing data as Genotype List (GL) String of IMGT/HLA alleles in the text box, select the subject's race/ethnic category, and add Recepient's Unacceptable Antigens in the second text area and click on "SUBMIT" to run virtual cross match. Alleles in the GL string should be resolved to specific HLA protein field (2nd field) or fully resolved (full IMGT/HLA allele name). Protein expression specifying characters ("L", "N", "S", "Q") can be used. Characters that specify antigen recognition domain equivalents (“G”, “P”, “g") can also be used. Population-specific HLA frequencies from NMDP are used to assign the most probable UNOS antigen equivalents for donor HLA typing. HLA loci supported are A, B, C, DRB1, DQB1, DRB3/4/5. </p>
     
     <form class="container text-center text-primary mt-5" action="{% url 'matchgls' %}" method="get">
        <textarea name = "userinput1" rows = "5" cols = "80" >A*02:01g+A*26:01g|A*02:55+A*26:07^C*05:01g+C*01:02g^B*15:01/B*15:02/B*15:03/B*15:04+B*27:05g^DRB1*12:01g+DRB1*01:01^DQB1*03:01g+DQB1*05:01</textarea> 
@@ -97,7 +97,7 @@
      </div>   
      <h4 class=" text-danger font-weight-bold mt-5 mb-5"> Enter Recepient's Unacceptable Antigens </h4>
      <div> <textarea name = "userinput3" rows = "1" cols = "80" >A2 Bw4</textarea>   </div>       
-  <input class="btn btn-dark btn-lg active mt-5" type="submit" value="Virtual Cross Match"/> </div> 
+  <input class="btn btn-danger btn-lg active mt-5" type="submit" value="SUBMIT"/> </div> 
     </form>
     <br>
     <br>
