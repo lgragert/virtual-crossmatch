@@ -36,13 +36,14 @@ def multiple_allele_codes(request):
 def match_gl(request):
 	donorTyping = request.GET['userinput1']
 	popSpec = request.GET['userinput2']
+	popSpecFul = pop_acro_dict[popSpec]
 	recepientAntigens = request.GET['userinput3']
 	#print(type(recepientAntigens))
 	recepientAntigens = re.split(r'[;,\s]\s*' , recepientAntigens)
 
 	vxm_output = vxm_gls(donorTyping, popSpec, recepientAntigens)
 	print(vxm_output)
-	return render(request, 'vxmGlsmatch.html', {'output': vxm_output, 'output1': donorTyping, 'output2': popSpec, 'output3': recepientAntigens})
+	return render(request, 'vxmGlsmatch.html', {'donor_ags': vxm_output[0], 'recepient_ags': vxm_output[1], 'output1': donorTyping, 'ethinicity': popSpecFul, 'output3': recepientAntigens})
 
 
 
