@@ -46,13 +46,14 @@ def match_gl(request):
 	donor_ags = ', '.join(vxm_output[0])
 	recepient_ags = ', '.join(vxm_output[1])
 	conflict = vxm_output[2]
+	conflicted = ', '.join(conflict)
 
 	if len(conflict) == 0:
 		end_result = "Virtual Crossmatch is Negative"
 	else:
-		end_result = "Virtual Crossmatch is Positive"	
+		end_result = "Virtual Crossmatch is Positive Because of Following Conflicting Antigens"	
 	
-	return render(request, 'vxmGlsmatch.html', {'donor_ags': donor_ags, 'recepient_ags': recepient_ags, 'output1': donorTyping, 'ethinicity': popSpecFul, 'output3': end_result})
+	return render(request, 'vxmGlsmatch.html', {'donor_ags': donor_ags, 'recepient_ags': recepient_ags, 'output1': donorTyping, 'ethinicity': popSpecFul, 'output3': end_result, "conflicts": conflicted})
 
 
 
@@ -75,10 +76,11 @@ def match_ac(request):
 	donor_ags = ', '.join(vxm_output[0])
 	recepient_ags = ', '.join(vxm_output[1])
 	conflict = vxm_output[2]
+	conflicted = ', '.join(conflict)
 
 	if len(conflict) == 0:
 		end_result = "Virtual Crossmatch is Negative"
 	else:
-		end_result = "Virtual Crossmatch is Positive"	
+		end_result = "Virtual Crossmatch is Positive Because of Following Conflicting Antigens"
 
-	return render(request, 'vxmMACmatch.html', {'donor_ags': donor_ags, 'recepient_ags': recepient_ags, 'output1': donorTyping, 'ethinicity': popSpecFul, 'output3': end_result})
+	return render(request, 'vxmMACmatch.html', {'donor_ags': donor_ags, 'recepient_ags': recepient_ags, 'output1': donorTyping, 'ethinicity': popSpecFul, 'output3': end_result, "conflicts": conflicted})
