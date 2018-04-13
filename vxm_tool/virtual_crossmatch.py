@@ -121,12 +121,12 @@ def vxm_allele_codes(allele_codes_list, donor_ethnicity, recepient_UA_list):
 
 
 	episn = [x for x in epis_list if x!="NA"]
-	print(episn)
+	#print(episn)
 	
 	donor_ags = ags_list + episn
 
-	print("Donor Antigens")
-	print(donor_ags)
+	#print("Donor Antigens")
+	#print(donor_ags)
 
 	UA_list = []
 	for ag in recepient_UA_list:
@@ -137,19 +137,17 @@ def vxm_allele_codes(allele_codes_list, donor_ethnicity, recepient_UA_list):
 
 
 	recepient_ags = [item for sublist in UA_list for item in sublist]
-	print("Recepient Unacceptable Antigens")
-	print(recepient_ags)
+	#print("Recepient Unacceptable Antigens")
+	#print(recepient_ags)
 
 	for ag in donor_ags:
 		if ag in recepient_ags:
 			conflicts.append(ag)
 		
-			
 	if len(conflicts) == 0:
 		print("Virtual Crossmatch is negative")
 
 	else:
 		print("Virtual Crossmatch is positive and the overlapping antigens are following")	
 
-
-	print(conflicts)
+	return (donor_ags, recepient_ags, conflicts)

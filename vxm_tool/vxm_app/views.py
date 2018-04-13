@@ -43,14 +43,42 @@ def match_gl(request):
 
 	vxm_output = vxm_gls(donorTyping, popSpec, recepientAntigens)
 	print(vxm_output)
-	return render(request, 'vxmGlsmatch.html', {'donor_ags': vxm_output[0], 'recepient_ags': vxm_output[1], 'output1': donorTyping, 'ethinicity': popSpecFul, 'output3': recepientAntigens})
+	donor_ags = ', '.join(vxm_output[0])
+	recepient_ags = ', '.join(vxm_output[1])
+	conflict = vxm_output[2]
+
+	if len(conflict) == 0:
+		end_result = "Virtual Crossmatch is Negative"
+	else:
+		end_result = "Virtual Crossmatch is Positive"	
+	
+	return render(request, 'vxmGlsmatch.html', {'donor_ags': donor_ags, 'recepient_ags': recepient_ags, 'output1': donorTyping, 'ethinicity': popSpecFul, 'output3': end_result})
 
 
 
 
-#def match_ac(request):
-	#donorTyping = request.GET['userinput1']
-	#popSpec = request.GET['userinput2']
-	#recepientAntigens = request.GET['userinput3']
-	#vxm_output = vxm_allele_codes(donorTyping, popSpec, recepientAntigens)
-	#return render(request, vxmMac.html, {'output': vxm_output})
+def match_ac(request):
+	donorTyping = request.GET['userinput1']
+	print(donorTyping)
+	donorTyping = donorTyping.strip()
+	donorCodes = re.split(r'[;,\s]\s*' , donorTyping)
+	print(donorCodes)
+	popSpec = request.GET['userinput2']
+	print(popSpec)
+	popSpecFul = pop_acro_dict[popSpec]
+	recepientAntigens = request.GET['userinput3'].strip()
+	recepientAntigens = re.split(r'[;,\s]\s*' , recepientAntigens)
+	
+
+	vxm_output = vxm_allele_codes(donorCodes, popSpec, recepientAntigens)
+	print(vxm_output)
+	donor_ags = ', '.join(vxm_output[0])
+	recepient_ags = ', '.join(vxm_output[1])
+	conflict = vxm_output[2]
+
+	if len(conflict) == 0:
+		end_result = "Virtual Crossmatch is Negative"
+	else:
+		end_result = "Virtual Crossmatch is Positive"	
+
+	return render(request, 'vxmMACmatch.html', {'donor_ags': donor_ags, 'recepient_ags': recepient_ags, 'output1': donorTyping, 'ethinicity': popSpecFul, 'output3': end_result})

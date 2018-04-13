@@ -22,6 +22,8 @@ urlpatterns = [
     path('glsvxm/', views.gl_string, name="glsvxm"),
     path('matchgls/', views.match_gl, name="matchgls"),
     path('macvxm/', views.multiple_allele_codes, name="macvxm"),
+    path('matchmac/', views.match_ac, name="matchmac"),
     path('admin/', admin.site.urls),
     path('license/', views.license, name="license"),
+
 ]
