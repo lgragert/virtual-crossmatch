@@ -14,7 +14,7 @@ UA_eq_dict = {}
 
 
 
-UNOS_UA_eq_filename = "UNOS_4-10_ag_equivalencies.csv"
+UNOS_UA_eq_filename = "UNOS_UA_ag_equivalencies.csv"
 UNOS_UA_eq_file = open(UNOS_UA_eq_filename, 'r')
 
 for row in UNOS_UA_eq_file:
