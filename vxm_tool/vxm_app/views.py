@@ -42,7 +42,7 @@ def match_gl(request):
 	recepientAntigens = re.split(r'[;,\s]\s*' , recepientAntigens)
 
 	vxm_output = vxm_gls(donorTyping, popSpec, recepientAntigens)
-	print(vxm_output)
+	#print(vxm_output)
 	donor_ags = ', '.join(vxm_output[0])
 	recepient_ags = ', '.join(vxm_output[1])
 	conflict = vxm_output[2]
@@ -52,7 +52,7 @@ def match_gl(request):
 		end_result = "Virtual Crossmatch is Negative"
 	else:
 		end_result = "Virtual Crossmatch is Positive Because of Following Conflicting Antigens"	
-	
+	#print(len(end_result))
 	return render(request, 'vxmGlsmatch.html', {'donor_ags': donor_ags, 'recepient_ags': recepient_ags, 'output1': donorTyping, 'ethinicity': popSpecFul, 'output3': end_result, "conflicts": conflicted})
 
 
