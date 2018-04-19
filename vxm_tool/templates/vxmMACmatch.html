@@ -10,7 +10,7 @@
      
     </head>
 </html>
-<nav class="navbar sticky-top navbar-expand-sm" style="background-color: #24478f;">
+<nav class="navbar sticky-top navbar-expand-sm" style="background-color: #336699;">
     <div class="text-center container" >
         <a class="navbar-brand text-white" href="{% url 'home' %}"> TransplantToolbox  </a>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
@@ -43,8 +43,8 @@
 <br>
 <br>
  
-<div class="container text-center text-primary font-weight-bold mt-5 mb-5">
-    <h2> VICTOR's  Analysis</h2>
+<div class="container text-center text-dark font-weight-bold mt-5 mb-5">
+    <h2 class="font-weight-bold"> Virtual Crossmatch results using VICTOR algorithm </h2>
 </div>
 
 <div class="row text-center">
@@ -63,7 +63,7 @@
   <div class="col-sm-6">
     <div class="card">
       <div class="card-body">
-        <h3 class="card-header text-danger">Recepient's Unacceptable Antigens</h3>
+        <h3 class="card-header text-danger">Recipient's Unacceptable Antigens</h3>
         <ul class="list-group list-group-flush">
         <li class="list-group-item"> <h4> {{recepient_ags}} </h4> </li>
       </div>
@@ -82,7 +82,14 @@
     <h2 class="alert-heading mb-0"> {{output3}} {{conflicts}}</h2> 
    </div>
 
-
+<br>
+  <br>
+<div class="jumbotron text-white mt-5 pt-2 pb-2" style="background-color: #336699;"> 
+<h3 class="container text-center font-italic" > Contact Us </h3>
+    <p class="container text-center font-italic"> For scientific and technical queries contact pathologygragertlab@tulane.edu.  </p>
+     <br>
+     <p class="container text-center font-weight-bold"> Prototype Tool for Research Use Only </p>
+</div>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

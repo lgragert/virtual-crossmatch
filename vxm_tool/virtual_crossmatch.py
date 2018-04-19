@@ -4,6 +4,7 @@
 import os, re
 import requests
 import hla 
+import itertools
 from hla import allele_truncate, locus_string_geno_list, expand_ac, single_locus_allele_codes_genotype
 
 import conversion_functions
@@ -34,7 +35,9 @@ for row in UNOS_UA_eq_file:
 def vxm_gls(donor_gl_string, donor_ethnicity, recepient_UA_list):
 	conflicts = []
 	output = gl_string_ags(donor_gl_string, donor_ethnicity)
-	
+	#print(output)
+	probs = output['Antigen Probablities']
+	#print(probs)
 	ags = list(output['UNOS antigens']) ## returns tuple of strings
 	ags_list = []
 
@@ -87,7 +90,7 @@ def vxm_gls(donor_gl_string, donor_ethnicity, recepient_UA_list):
 	else:
 		print("Virtual Crossmatch is positive and the overlapping antigens are following")	
 
-	return (donor_ags, recepient_ags, conflicts)
+	return (donor_ags, recepient_ags, conflicts, probs)
 
 
 

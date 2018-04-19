@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
-    <nav class="navbar sticky-top navbar-expand-sm" style="background-color: #24478f;">
+    <nav class="navbar sticky-top navbar-expand-sm" style="background-color: #336699;">
     <div class="text-center container" >
         <a class="navbar-brand text-white" href="{% url 'home' %}"> TransplantToolbox  </a>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
@@ -37,7 +37,9 @@
     </nav>            
 
 <body> 
-
+<div class="container text-center  pt-4 pb-4 mt-5">
+    <h2 class="text-dark font-weight-bold">  VICTOR:  VIrtual CrossmaTch for mOleculaR typing data </h2> 
+   </div> 
     <h2 class="container text-danger text-center font-weight-bold mt-5 mb-5"> Donor HLA typing as NMDP Multiple Allele Codes </h2>
     
 <div> 
@@ -95,7 +97,7 @@
                 </select>
          </div> 
      </div>   
-     <h4 class=" text-danger font-weight-bold mb-5 mt-5"> Enter Recepient's Unacceptable Antigens </h4>
+     <h4 class=" text-danger font-weight-bold mb-5 mt-5"> Enter Recipient's Unacceptable Antigens </h4>
      <div> <textarea name = "userinput3" rows = "1" cols = "80" >A2 Bw4</textarea>   </div>       
   <input class="btn btn-danger btn-lg active mt-5" type="submit" value="SUBMIT"/> </div> 
     </form>
@@ -104,10 +106,12 @@
     <br>
     
 </div>
-<div class="jumbotron text-white mt-5 pt-2 pb-2" style="background-color: #24478f;"> 
+<div class="jumbotron text-white mt-5 pt-2 pb-2" style="background-color: #336699;"> 
 <h3 class="container text-center font-italic" > Contact Us </h3>
     <p class="container text-center font-italic"> For scientific and technical queries contact pathologygragertlab@tulane.edu.  </p>
      <br>
+     <p class="container text-center font-weight-bold"> Prototype Tool for Research Use Only </p>
+</div>     
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"  crossorigin="anonymous"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 

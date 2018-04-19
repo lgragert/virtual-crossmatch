@@ -243,7 +243,7 @@ def gl_string_ags(gl_string, pop):
 		dr345_genotype_list = hla.locus_string_geno_list(dr345_locus)
 		dr345_ags = genotype_ags(dr345_genotype_list,pop)
 		ag_list = a_ags + "," + b_ags + "," + c_ags  + "," + dr_ags + "," + dqb_ags + "," + dr345_ags
-
+	#print(ag_list)
 	ages = ag_list[0::3]
 	bw46_list = ag_list[1::3]
 	probs = ag_list[2::3]
@@ -306,7 +306,7 @@ def genotype_ags(genotype_list, pop):
 		#ag_prob = 1
 	#else:
 		#antigen_list = sortef_gf[1::2]	
-
+	#print(sorted_gf)
 	top_ag_geno = sorted_gf[0][0]
 	top_gf = sorted_gf[0][1]
 	#print(top_ag_geno)	
