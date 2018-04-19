@@ -39,7 +39,11 @@ def match_gl(request):
 	popSpecFul = pop_acro_dict[popSpec]
 	recepientAntigens = request.GET['userinput3']
 	#print(type(recepientAntigens))
-	recepientAntigens = re.split(r'[;,\s]\s*' , recepientAntigens)
+
+	if len(recepientAntigens) == 0:
+		recepientAntigens = "NONE"
+	else:
+		recepientAntigens = re.split(r'[;,\s]\s*' , recepientAntigens)
 
 	vxm_output = vxm_gls(donorTyping, popSpec, recepientAntigens)
 	#print(vxm_output)
@@ -68,7 +72,12 @@ def match_ac(request):
 	print(popSpec)
 	popSpecFul = pop_acro_dict[popSpec]
 	recepientAntigens = request.GET['userinput3'].strip()
-	recepientAntigens = re.split(r'[;,\s]\s*' , recepientAntigens)
+
+	if len(recepientAntigens) == 0:
+		recepientAntigens = "NONE"
+	else:
+		recepientAntigens = re.split(r'[;,\s]\s*' , recepientAntigens)
+	
 	
 
 	vxm_output = vxm_allele_codes(donorCodes, popSpec, recepientAntigens)
