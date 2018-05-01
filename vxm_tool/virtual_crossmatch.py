@@ -86,114 +86,22 @@ def vxm_gls(donor_gl_string, donor_ethnicity, recipient_UA_list):
 
 
 
-
-
-
-
-
-
-
-
-
-def prevxm_gls(donor_gl_string, donor_ethnicity, recepient_UA_list):
-	conflicts = []
-	output = gl_string_ags(donor_gl_string, donor_ethnicity)
-	print(output)
-	probs = output['Antigen Probablities']
-	#print(probs)
-	ags = list(output['UNOS antigens']) ## returns tuple of strings
-	ags_list = []
-
-	for i in ags: 						### converts tuple of strings to list
-		isplit = i.split(",")
-		x = isplit[0]
-		ags_list.append(x)
-		y = isplit[1]
-		ags_list.append(y)
-
-
-
-	pub_epis = list(output['Bw4/6 epitopes'])
-	epis_list = []
-	for i in pub_epis:
-		isplit = i.split(",")
-		x = isplit[0]
-		epis_list.append(x)
-		y = isplit[1]
-		epis_list.append(y)
-
-
-	episn = [x for x in epis_list if x!="NA"]
-	
-	donor_ags = ags_list + episn
-
-	#print("Donor Antigens")
-	#print(donor_ags)
-
-	UA_list = []
-	for ag in recepient_UA_list:
-		if ag in UA_eq_dict.keys():
-			UA_list.append(UA_eq_dict[ag])
-		else:
-			UA_list.append([ag])	
-
-
-	recepient_ags = [item for sublist in UA_list for item in sublist]
-	#print("Recepient Unacceptable Antigens")
-	#print(recepient_ags)
-
-	for ag in donor_ags:
-		if ag in recepient_ags:
-			conflicts.append(ag)
-		
-			
-	#if len(conflicts) == 0:
-		#print("Virtual Crossmatch is negative")
-
-	#else:
-		#print("Virtual Crossmatch is positive and the overlapping antigens are following")	
-		#print(conflicts)
-
-	return (donor_ags, recepient_ags, conflicts, probs)
-
-
-
-
-
 def vxm_allele_codes(allele_codes_list, donor_ethnicity, recepient_UA_list):
 	conflicts = []
+	ag_probs = {}
+	donor_ags = []
 	output = allele_code_ags(allele_codes_list, donor_ethnicity)
-	
-	ags = list(output['Antigens']) ## returns tuple of strings
-	print(ags)
-	ags_list = []
+	for i in output:
+		ag_list = i[0].split("+")
+		for j in ag_list:
+			if j in ag_probs.keys():
+				ag_probs[j] += i[1]
+			else:
+				ag_probs[j] = i[1]
+	#print(ag_probs)
 
-	for i in ags: 						### converts tuple of strings to list
-		isplit = i.split(",")
-		x = isplit[0]
-		ags_list.append(x)
-		y = isplit[1]
-		ags_list.append(y)
-
-
-
-	pub_epis = list(output['Bw4/6 epitopes'])
-	epis_list = []
-	for i in pub_epis:
-		isplit = i.split(",")
-		x = isplit[0]
-		epis_list.append(x)
-		y = isplit[1]
-		epis_list.append(y)
-
-
-	episn = [x for x in epis_list if x!="NA"]
-	#print(episn)
-	
-	donor_ags = ags_list + episn
-
-	#print("Donor Antigens")
-	#print(donor_ags)
+	for k in ag_probs.keys():
+		donor_ags.append(k)
 
 	UA_list = []
 	for ag in recepient_UA_list:
@@ -204,17 +112,30 @@ def vxm_allele_codes(allele_codes_list, donor_ethnicity, recepient_UA_list):
 
 
 	recepient_ags = [item for sublist in UA_list for item in sublist]
-	#print("Recepient Unacceptable Antigens")
-	#print(recepient_ags)
+
+
 
 	for ag in donor_ags:
 		if ag in recepient_ags:
 			conflicts.append(ag)
 		
-	if len(conflicts) == 0:
-		print("Virtual Crossmatch is negative")
+	conflict_ag_probs = {}
 
-	else:
-		print("Virtual Crossmatch is positive and the overlapping antigens are following")	
+	for i in conflicts:
+		conflict_ag_probs[i] = ag_probs[i]
 
-	return (donor_ags, recepient_ags, conflicts)
+
+	for i,j in conflict_ag_probs.items():
+		if j > 1.00:
+			j = 1.00
+			conflict_ag_probs[i] = j
+
+	#print(conflict_ag_probs)
+
+
+	return(donor_ags, recepient_ags, conflicts, conflict_ag_probs)
+
+
+
+
+

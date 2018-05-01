@@ -500,12 +500,12 @@ def allele_code_ags(allele_codes_list, pop):
 		ag_list = a_ags  + b_ags  + c_ags  + dr_ags  + dqb_ags  + dr345_ags
 
 
-	ages = ag_list[0::3]
-	bw46_list = ag_list[1::3]
-	probs = ag_list[2::3]
-	al_dict = {"Allele Codes" : allele_codes_list, "Antigens": ages, "Bw4/6 epitopes": bw46_list, "Antigen Probablities": probs}
+	#ages = ag_list[0::3]
+	#bw46_list = ag_list[1::3]
+	#probs = ag_list[2::3]
+	#al_dict = {"Allele Codes" : allele_codes_list, "Antigens": ages, "Bw4/6 epitopes": bw46_list, "Antigen Probablities": probs}
 	
-	return al_dict	
+	return ag_list
 	
 
 

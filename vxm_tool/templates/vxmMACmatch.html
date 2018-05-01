@@ -32,7 +32,7 @@
                 <li class="nav-item active">
                   <a class="nav-link text-white" href="http://www.transplanttoolbox.org/"> ALLAN</a>
                 </li>
-    </ul>
+          </ul>
     </div>
     </nav>            
 
@@ -54,7 +54,7 @@
         <h3 class="card-header text-danger">Donor Parameters</h3>
         <ul class="list-group list-group-flush">
         <li class="list-group-item"> <h4> Donor Race: {{ethinicity}} </h4> </li>
-        <li class="list-group-item"> <h4> Donor HLA Typing</h4> {{output1}} </li>
+        <li class="list-group-item"> <h4> Donor HLA Typing  {{output1}} </h4> </li>
         <li class="list-group-item"> <h4>  Donor Antigens: {{donor_ags}} </h4></li>
         </ul>
       </div>
@@ -70,8 +70,33 @@
     </div>
   </div>
 </div>
+<br>
+<br> 
+<br>
+<br>
+{% if conflicts %}
+ <div class="container text-danger text-center"> <h3>  VXM Antigen Probabilities  </h3> 
+<table class="table table-hover table-responsive-sm table-bordered table-hover table-striped  text-xl-center"> 
+            <thead class="thead-dark">
+                <tr> 
+                    <th scope="col"> Antigen</th>
+                    <th scope="col"> Probability </th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+            {% for ag, prob in zipped_list %}
+        <tr class="bg-light">
+          <td>{{ag}}</td>
+          <td>{{prob}}</td>
+          
+        </tr>
+      {% endfor %}
+            </tbody>
+        </table>    
 
-
+</div>
+{% endif %}
 
 <br>
 <br> 
