@@ -56,6 +56,7 @@
         <li class="list-group-item"> <h4> Donor Race: {{ethinicity}} </h4> </li>
         <li class="list-group-item"> <h4> Donor HLA Typing</h4> {{output1}} </li>
         <li class="list-group-item"> <h4>  Donor Antigens: {{donor_ags}} </h4></li>
+        
         </ul>
       </div>
     </div>
@@ -69,10 +70,37 @@
       </div>
     </div>
   </div>
+</div> 
+
+<br>
+<br> 
+<br>
+<br>
+{% if conflicts %}
+ <div class="container text-center"> <h4>  VXM Antigen Probabilities  </h4> 
+<table class="table table-hover table-responsive-sm table-bordered table-hover table-striped  text-xl-center"> 
+            <thead class="thead-dark">
+                <tr> 
+                    <th scope="col"> Antigen</th>
+                    <th scope="col"> Probability </th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+            {% for ag, prob in zipped_list %}
+        <tr class="bg-light">
+          <td>{{ag}}</td>
+          <td>{{prob}}</td>
+          
+        </tr>
+      {% endfor %}
+            </tbody>
+        </table>    
+
 </div>
+{% endif %}
 
-
-
+        
 <br>
 <br> 
 <br>

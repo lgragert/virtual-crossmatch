@@ -3,8 +3,8 @@ from django.shortcuts import render
 
 import re
 
-import conversion_functions
-from conversion_functions import convert_allele_to_ag, convert_allele_list_to_ags, gl_string_ags, genotype_ags, allele_code_ags
+import conversion_functions_for_VXM
+from conversion_functions_for_VXM import gl_string_ags, genotype_ags, allele_code_ags
 
 import virtual_crossmatch
 
@@ -41,23 +41,30 @@ def match_gl(request):
 	#print(type(recepientAntigens))
 
 	if len(recepientAntigens) == 0:
-		recepientAntigens = "NONE"
+		recepientAntigens = []
 	else:
 		recepientAntigens = re.split(r'[;,\s]\s*' , recepientAntigens)
 
 	vxm_output = vxm_gls(donorTyping, popSpec, recepientAntigens)
-	#print(vxm_output)
 	donor_ags = ', '.join(vxm_output[0])
 	recepient_ags = ', '.join(vxm_output[1])
-	conflict = vxm_output[2]
-	conflicted = ', '.join(conflict)
+	conflicted_ag = ', '.join(vxm_output[2])
+	ag_probabilities = vxm_output[3]
+	#print(ag_probabilities)
+	cags = []
+	cag_probs = []
+	for i, k in ag_probabilities.items():
+		cags.append(i)
+		cag_probs.append(k)
 
-	if len(conflict) == 0:
+	if len(conflicted_ag) == 0:
 		end_result = "Virtual Crossmatch is Negative"
 	else:
 		end_result = "Virtual Crossmatch is Positive Because of Following Conflicting Antigens"	
 	#print(len(end_result))
-	return render(request, 'vxmGlsmatch.html', {'donor_ags': donor_ags, 'recepient_ags': recepient_ags, 'output1': donorTyping, 'ethinicity': popSpecFul, 'output3': end_result, "conflicts": conflicted})
+	return render(request, 'vxmGlsmatch.html', {'donor_ags': donor_ags, 
+		'recepient_ags': recepient_ags, 'output1': donorTyping, 'ethinicity': popSpecFul, 
+		'output3': end_result, "conflicts": conflicted_ag, "vxm_probs": ag_probabilities, 'zipped_list': zip(cags, cag_probs)})
 
 
 
@@ -74,7 +81,7 @@ def match_ac(request):
 	recepientAntigens = request.GET['userinput3'].strip()
 
 	if len(recepientAntigens) == 0:
-		recepientAntigens = "NONE"
+		recepientAntigens = []
 	else:
 		recepientAntigens = re.split(r'[;,\s]\s*' , recepientAntigens)
 	

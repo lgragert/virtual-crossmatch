@@ -11,7 +11,11 @@ from hla import allele_truncate, locus_string_geno_list, expand_ac, single_locus
 allele_to_ag_dict = {}
 population_allele_frequencies = {}
 allele_frequencies = {}
+b_bw_dict = {}
+bw4_list = []
+bw6_list = []
 
+agbw46 = {}
 ### Dictionary with alleles and equivalent antigens
 
 UNOS_conversion_table_filename = "UNOS_conversion_table_with_rules.csv"
@@ -26,9 +30,29 @@ for row in UNOS_conversion_table_file:
 		antigen = row.split(',')[1]
 		rule = row.split(',') [2]
 		bw4_6 = row.split(',')[3]
+		if bw4_6 != "NA":
+			agbw46[antigen] = bw4_6
+		if bw4_6 == "Bw4":
+			bw4_list.append(antigen)
+		if bw4_6 == "Bw6":
+			bw6_list.append(antigen)
+
+		
 		
 	allele_to_ag_dict[allele] = antigen, rule, bw4_6 
 	allele_to_ag_dict[allele_4d] = antigen, rule, bw4_6
+
+bw4_list = list(set(bw4_list))
+bw6_list = list(set(bw6_list))
+
+
+b_bw_dict["Bw4"] = bw4_list
+b_bw_dict["Bw6"] = bw6_list
+
+#print(agbw46)
+
+
+#print(b_bw_dict)	
 
 for file in glob.glob('./freqs_6loc/*.freqs'):
 	#print(file)
@@ -54,51 +78,6 @@ for file in glob.glob('./freqs_6loc/*.freqs'):
 					population_allele_frequencies[pop][allele] = float(haplotype_frequency)	
 
 
-
-def convert_allele_to_ag(allele):
-
-	"""This function should be called when antigen conversion has to be done for a single allele. Enter an IMGT/HLA allele as a  string 
-	input and the get the coressponding antigen as per UNOS rules. Also if the antigen is Bw4/6 is also indicated. 
-	The rule applied for the conversion is printed out with every input"""
-	allele_dict = {}
-	allele = allele.rstrip("p P g G")
-	if allele in allele_to_ag_dict:	
-		ag = allele_to_ag_dict[allele][0]
-		rule = allele_to_ag_dict[allele][1]
-		bw4_6 = allele_to_ag_dict[allele][2]
-	
-	else:
-		ag = "NA"
-	allele_dict[allele] = [ag, bw4_6]
-	return allele_dict
-
-
-def convert_allele_list_to_ags(hla_allele_list):
-	
-	"""This function can be called if a list of alleles has to be converted to antigens. Input format is a list and 
-	the corresponding antigens and rules will be printed out"""
-	allele_list_dict = {}
-	ag_list = []
-	bw4_6_list = []
-	for allele in hla_allele_list:
-		allele = allele.rstrip("p P g G")
-		if allele in allele_to_ag_dict:
-			ag = ""
-			rule = ""
-			ag = allele_to_ag_dict[allele][0]
-			rule = allele_to_ag_dict[allele][1]
-			bw4_6 = allele_to_ag_dict[allele][2]
-			ag_list.append(ag)
-			bw4_6_list.append(bw4_6)
-			
-		else:
-			ag = "NA"
-			ag_list.append(ag)
-	
-	allele_list_dict = {"Allele_list": hla_allele_list, "UNOS antigens": ag_list, "Bw4/6 epitopes": bw4_6_list}
-				
-	return allele_list_dict
-			
 
 
 def gl_string_ags(gl_string, pop):
@@ -244,11 +223,11 @@ def gl_string_ags(gl_string, pop):
 		dr345_ags = genotype_ags(dr345_genotype_list,pop)
 		ag_list = a_ags + "," + b_ags + "," + c_ags  + "," + dr_ags + "," + dqb_ags + "," + dr345_ags
 	#print(ag_list)
-	ages = ag_list[0::3]
-	bw46_list = ag_list[1::3]
-	probs = ag_list[2::3]
-	gl_dict = {"GL_string" : gl_string, "UNOS antigens": ages, "Bw4/6 epitopes": bw46_list, "Antigen Probablities": probs }
-	return gl_dict
+	#ages = ag_list[0::3]
+	#bw46_list = ag_list[1::3]
+	#probs = ag_list[2::3]
+	#gl_dict = {"GL_string" : gl_string, "UNOS antigens": ages, "Bw4/6 epitopes": bw46_list, "Antigen Probablities": probs }
+	return ag_list
 	
 def genotype_ags(genotype_list, pop):
 	ag_freq_1 = 0.0
@@ -268,6 +247,8 @@ def genotype_ags(genotype_list, pop):
 		bw46_1 = allele_to_ag_dict[allele_1][2]
 		ag_2 = allele_to_ag_dict[allele_2][0]
 		bw46_2 = allele_to_ag_dict[allele_2][2]
+		
+
 
 		if allele_1 in population_allele_frequencies[pop]:
 			ag_freq_1 = population_allele_frequencies[pop][allele_1]
@@ -280,7 +261,16 @@ def genotype_ags(genotype_list, pop):
 		else:
 			gf = 2 * float(ag_freq_1) * float(ag_freq_2)	
 
-			geno_antigen = ag_1 + "+" + ag_2
+		geno_antigen = ag_1 + "+" + ag_2
+		
+		if bw46_1 != "NA":
+
+			geno_antigen = geno_antigen + "+" + bw46_1 
+
+		if bw46_2	!= "NA":
+			geno_antigen = geno_antigen + "+" + bw46_2	
+			
+		#print(geno_antigen)
 
 		if geno_antigen in geno_antigen_freq.keys():
 			geno_antigen_freq[geno_antigen] += float(gf)
@@ -296,7 +286,7 @@ def genotype_ags(genotype_list, pop):
 		
 	for i,j in geno_antigen_freq.items():
 		ag_probs = j/TF
-		geno_antigen_freq[i] = ag_probs
+		geno_antigen_freq[i] = round(ag_probs, 4)
 
 		
 	#print(geno_antigen_freq)		
@@ -307,16 +297,16 @@ def genotype_ags(genotype_list, pop):
 	#else:
 		#antigen_list = sortef_gf[1::2]	
 	#print(sorted_gf)
-	top_ag_geno = sorted_gf[0][0]
-	top_gf = sorted_gf[0][1]
+	# top_ag_geno = sorted_gf[0][0]
+	# top_gf = sorted_gf[0][1]
 	#print(top_ag_geno)	
-	ag_1 = top_ag_geno.split("+")[0]
-	ag_2 = top_ag_geno.split("+")[1]	
+	# ag_1 = top_ag_geno.split("+")[0]
+	# ag_2 = top_ag_geno.split("+")[1]	
 	#print(ag_1)
 	#print(ag_2)
-	ag_list = ag_1 + "," + ag_2
-	bw46_list = bw46_1	+ "," + bw46_2
-	return (ag_list, bw46_list, sorted_gf)
+	# ag_list = ag_1 + "," + ag_2
+	#bw46_list = bw46_1	+ "," + bw46_2
+	return (sorted_gf)
 
 
 def allele_code_ags(allele_codes_list, pop):
