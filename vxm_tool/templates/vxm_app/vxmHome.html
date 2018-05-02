@@ -12,43 +12,64 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
 
-    
+<nav class="navbar sticky-top navbar-expand-sm" style="background-color: #336699;">
+    <div class="text-center container" >
+        <a class="navbar-brand text-white" href="{% url 'home' %}"> TransplantToolbox  </a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+             <ul class="nav nav-fill nav-pills">
+                <li class="nav-item active">
+                   <a class=" text-center nav-link text-white" href="{% url 'home' %}"> Home </a> 
+                 </li>
+                
+                <li class="nav-item active">
+                  <a class="nav-link text-white" href="{% url 'glsvxm' %}"> Genotype List Strings</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link text-white" href="{% url 'macvxm' %}"> Multiple Allele Codes </a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link text-white" href="{% url 'license' %}"> License </a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link text-white" href="http://www.transplanttoolbox.org/"> ALLAN</a>
+                </li>
+    </ul>
+    </div>
+    </nav>            
+
 	
 <body>
-  <div class="container jumbotron pt-4 pb-4 mt-5">
-    <h2 class="text-success font-weight-bold">  Transplanttoolbox: Virtual Crossmatch </h2> 
+  <div class="container text-center  pt-4 pb-4 mt-5">
+    <h2 class="text-danger font-weight-bold">  VICTOR:  VIrtual CrossmaTch for mOleculaR typing data </h2> 
+   </div> 
+    <h5 class="text-dark container jumbotron pt-4 pb-4 mt-4"> This prototype tool computes a virtual crossmatch using the recipient’s unacceptable antigens and molecular HLA typing of the donor. The current UNOS virtual crossmatch allows only antigen-level HLA for the donor. </h5>
+  </div>
+  <br>
+  <br>
     
-   	
-        <h4 class="text-dark mt-3"> Compute virtual crossmatch for molecular HLA typing.  </h4>
-        
-    </div>
-  <br>
-    <div class="container pb-4 mb-5" style="border:1px solid #255"> 
-      <h3 class="container font-weight-bold mt-4 mb-5" > HLA Typing Data Input Formats (choose one): </h3>
-        <div class="container mt-4"> 
-            <div class="row">
-            <div class="col-sm" > <h4> Genotype List Strings </h4> </div>
-            
-             </div>
-
-  <br>
-
-            <div class="row">
-            <div class="col-sm" > <h4> Multiple Allele Codes </h4> </div>
-            
-            
-          
-          </div>
-        
+  <div class="container pb-4 mb-5" style="border:1px solid #255"> 
+    <h3 class="container font-weight-bold mt-4 mb-5" > HLA Typing Data Input Formats (choose one): </h3>
+      <div class="container mt-4"> 
+        <div class="row">
+            <div class="col-sm" > <a  class="btn btn-danger active btn-lg" href="{% url 'glsvxm' %}" role="button" >Genotype List String</a> </div>
+            <div class="col-sm" > <a  class="btn btn-danger active btn-lg" href="{% url 'macvxm' %}" role="button" > NMDP Multiple Allele Codes </a> </div> 
+        </div>
       </div>
-    </div>
+  </div>
    
 
-<div class="jumbotron text-white mt-5 pt-2 pb-2" style="background-color: #046A38;"> 
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+
+<div class="jumbotron text-white mt-5 pt-2 pb-2" style="background-color: #336699;"> 
 <h3 class="container text-center font-italic" > Contact Us </h3>
     <p class="container text-center font-italic"> For scientific and technical queries contact pathologygragertlab@tulane.edu.  </p>
      <br>
-
+     <p class="container text-center font-weight-bold"> Prototype Tool for Research Use Only </p>
 </div>
      <!--<div style="margin-left:50px;"></div> -->
      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

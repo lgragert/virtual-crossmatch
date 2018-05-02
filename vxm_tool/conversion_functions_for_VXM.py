@@ -227,7 +227,9 @@ def gl_string_ags(gl_string, pop):
 	#bw46_list = ag_list[1::3]
 	#probs = ag_list[2::3]
 	#gl_dict = {"GL_string" : gl_string, "UNOS antigens": ages, "Bw4/6 epitopes": bw46_list, "Antigen Probablities": probs }
+	print(ag_list)
 	return ag_list
+
 	
 def genotype_ags(genotype_list, pop):
 	ag_freq_1 = 0.0
@@ -504,7 +506,7 @@ def allele_code_ags(allele_codes_list, pop):
 	#bw46_list = ag_list[1::3]
 	#probs = ag_list[2::3]
 	#al_dict = {"Allele Codes" : allele_codes_list, "Antigens": ages, "Bw4/6 epitopes": bw46_list, "Antigen Probablities": probs}
-	
+	print(ag_list)
 	return ag_list
 	
 

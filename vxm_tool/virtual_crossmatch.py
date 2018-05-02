@@ -98,7 +98,7 @@ def vxm_allele_codes(allele_codes_list, donor_ethnicity, recepient_UA_list):
 				ag_probs[j] += i[1]
 			else:
 				ag_probs[j] = i[1]
-	#print(ag_probs)
+	print(ag_probs)
 
 	for k in ag_probs.keys():
 		donor_ags.append(k)
@@ -130,7 +130,7 @@ def vxm_allele_codes(allele_codes_list, donor_ethnicity, recepient_UA_list):
 			j = 1.00
 			conflict_ag_probs[i] = j
 
-	#print(conflict_ag_probs)
+	print(conflict_ag_probs)
 
 
 	return(donor_ags, recepient_ags, conflicts, conflict_ag_probs)

@@ -21,17 +21,17 @@ pop_acro_dict = {"AFA": "African American", "API": "Asia/Pacific Islander", "CAU
 
 
 def vxm_home(request):
-	return render(request, 'vxmHome.html')
+	return render(request, 'vxm_app/vxmHome.html')
 
 def license(request):
-    return render(request, 'license.html')
+    return render(request, 'vxm_app/license.html')
 
 def gl_string(request):
-    return render(request, 'glsVxm.html')
+    return render(request, 'vxm_app/glsVxm.html')
 
 
 def multiple_allele_codes(request):
-	return render(request, 'macVxm.html')
+	return render(request, 'vxm_app/macVxm.html')
 
 def match_gl(request):
 	donorTyping = request.GET['userinput1']
@@ -48,22 +48,24 @@ def match_gl(request):
 
 	vxm_output = vxm_gls(donorTyping, popSpec, recepientAntigens)
 	donor_ags = ', '.join(vxm_output[0])
+	print(donor_ags)
 	recepient_ags = ', '.join(vxm_output[1])
 	conflicted_ag = ', '.join(vxm_output[2])
 	ag_probabilities = vxm_output[3]
-	#print(ag_probabilities)
+	print(ag_probabilities)
+	print(conflicted_ag)
 	cags = []
 	cag_probs = []
 	for i, k in ag_probabilities.items():
 		cags.append(i)
 		cag_probs.append(k)
-
+	
 	if len(conflicted_ag) == 0:
 		end_result = "Virtual Crossmatch is Negative"
 	else:
 		end_result = "Virtual Crossmatch is Positive Because of Following Conflicting Antigens"	
 	#print(len(end_result))
-	return render(request, 'vxmGlsmatch.html', {'donor_ags': donor_ags, 
+	return render(request, 'vxm_app/vxmGlsmatch.html', {'donor_ags': donor_ags, 
 		'recepient_ags': recepient_ags, 'output1': donorTyping, 'ethinicity': popSpecFul, 
 		'output3': end_result, "conflicts": conflicted_ag, "vxm_probs": ag_probabilities, 'zipped_list': zip(cags, cag_probs)})
 
@@ -89,24 +91,24 @@ def match_ac(request):
 	vxm_output = vxm_allele_codes(donorCodes, popSpec, recepientAntigens)
 	print(vxm_output)
 	donor_ags = ', '.join(vxm_output[0])
+	print(donor_ags)
 	recepient_ags = ', '.join(vxm_output[1])
 	conflicted_ag = ', '.join(vxm_output[2])
+	print(conflicted_ag)
 	ag_probabilities = vxm_output[3]
-	
-
-	ag_probabilities = vxm_output[3]
-	#print(ag_probabilities)
+	print("antigen probabilities")
+	print(ag_probabilities)
 	cags = []
 	cag_probs = []
 	for i, k in ag_probabilities.items():
 		cags.append(i)
 		cag_probs.append(k)
-
+	#print(cag_probs)
 	if len(conflicted_ag) == 0:
 		end_result = "Virtual Crossmatch is Negative"
 	else:
 		end_result = "Virtual Crossmatch is Positive Because of Following Conflicting Antigens"	
 	#print(len(end_result))
-	return render(request, 'vxmGlsmatch.html', {'donor_ags': donor_ags, 
+	return render(request, 'vxm_app/vxmGlsmatch.html', {'donor_ags': donor_ags, 
 		'recepient_ags': recepient_ags, 'output1': donorTyping, 'ethinicity': popSpecFul, 
 		'output3': end_result, "conflicts": conflicted_ag, "vxm_probs": ag_probabilities, 'zipped_list': zip(cags, cag_probs)})
