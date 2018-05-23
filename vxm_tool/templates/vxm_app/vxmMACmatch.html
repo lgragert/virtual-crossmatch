@@ -12,12 +12,12 @@
 </html>
 <nav class="navbar sticky-top navbar-expand-sm" style="background-color: #336699;">
     <div class="text-center container" >
-        <a class="navbar-brand text-white" href="{% url 'home' %}"> TransplantToolbox  </a>
+        <a class="navbar-brand text-white" href="{% url 'victor_home' %}"> TransplantToolbox  </a>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
           <div class="collapse navbar-collapse" id="navbarNav">
              <ul class="nav nav-fill nav-pills">
                 <li class="nav-item active">
-                   <a class=" text-center nav-link text-white" href="{% url 'home' %}"> Home </a> 
+                   <a class=" text-center nav-link text-white" href="{% url 'victor_home' %}"> Home </a> 
                  </li>
                 
                 <li class="nav-item active">
@@ -27,7 +27,7 @@
                   <a class="nav-link text-white" href="{% url 'macvxm' %}"> Multiple Allele Codes </a>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link text-white" href="{% url 'license' %}"> License </a>
+                  <a class="nav-link text-white" href="{% url 'victor_license' %}"> License </a>
                 </li>
                 <li class="nav-item active">
                   <a class="nav-link text-white" href="http://www.transplanttoolbox.org/"> ALLAN</a>
@@ -54,7 +54,7 @@
         <h3 class="card-header text-danger">Donor Parameters</h3>
         <ul class="list-group list-group-flush">
         <li class="list-group-item"> <h4> Donor Race: {{ethinicity}} </h4> </li>
-        <li class="list-group-item"> <h4> Donor HLA Typing  {{output1}} </h4> </li>
+        <li class="list-group-item"> <h4> Donor HLA Typing  </h4> {{output1}}  </li>
         <li class="list-group-item"> <h4>  Donor Antigens: {{donor_ags}} </h4></li>
         </ul>
       </div>
@@ -75,7 +75,7 @@
 <br>
 <br>
 {% if conflicts %}
- <div class="container text-danger text-center"> <h3>  VXM Antigen Probabilities  </h3> 
+ <div class="container text-dark text-center"> <h3>  VXM Antigen Probabilities  </h3> 
 <table class="table table-hover table-responsive-sm table-bordered table-hover table-striped  text-xl-center"> 
             <thead class="thead-dark">
                 <tr> 

@@ -54,9 +54,9 @@ b_bw_dict["Bw6"] = bw6_list
 
 #print(b_bw_dict)	
 
-for file in glob.glob('./freqs_6loc/*.freqs'):
+for file in glob.glob('*.freqs'):
 	#print(file)
-	pop = re.split(r'[/ .]', file)[3]
+	pop = file.split(".")[0]
 	#print(pop)
 	population_allele_frequencies[pop] = {}
 	freq_file = open(file, 'r')
