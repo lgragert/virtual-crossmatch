@@ -15,6 +15,8 @@ b_bw_dict = {}
 bw4_list = []
 bw6_list = []
 
+
+unosEQags = []
 agbw46 = {}
 ### Dictionary with alleles and equivalent antigens
 
@@ -28,6 +30,7 @@ for row in UNOS_conversion_table_file:
 		allele = row.split(',')[0]
 		allele_4d = hla.allele_truncate(allele)
 		antigen = row.split(',')[1]
+		unosEQags.append(antigen)
 		rule = row.split(',') [2]
 		bw4_6 = row.split(',')[3]
 		if bw4_6 != "NA":
@@ -45,6 +48,10 @@ for row in UNOS_conversion_table_file:
 bw4_list = list(set(bw4_list))
 bw6_list = list(set(bw6_list))
 
+unosagslist = list(set(unosEQags))
+
+#print(unosagslist)
+#print(len(unosagslist))
 
 b_bw_dict["Bw4"] = bw4_list
 b_bw_dict["Bw6"] = bw6_list
@@ -78,7 +85,29 @@ for file in glob.glob('*.freqs'):
 					population_allele_frequencies[pop][allele] = float(haplotype_frequency)	
 
 
-
+def convert_allele_list_to_ags(hla_allele_list):
+	
+	"""This function can be called if a list of alleles has to be converted to antigens. Input format is a list and 
+	the corresponding antigens and rules will be printed out"""
+	allele_list_dict = {}
+	ag_list = []
+	bw4_6_list = []
+	for allele in hla_allele_list:
+		allele = allele.rstrip("p P g G")
+		if allele in allele_to_ag_dict:
+			ag = allele_to_ag_dict[allele][0]
+			ag_list.append(ag)
+			bw4_6 = allele_to_ag_dict[allele][2]
+			if bw4_6 != "NA":
+				bw4_6_list.append(bw4_6)
+			
+		else:
+			continue
+	
+	bw46_list = list(set(bw4_6_list))
+	ags = ag_list + bw46_list
+				
+	return ags
 
 def gl_string_ags(gl_string, pop):
 	gl_dict = {}

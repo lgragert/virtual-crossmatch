@@ -8,7 +8,7 @@ import itertools
 from hla import allele_truncate, locus_string_geno_list, expand_ac, single_locus_allele_codes_genotype
 
 import conversion_functions_for_VXM
-from conversion_functions_for_VXM import  gl_string_ags, genotype_ags, allele_code_ags
+from conversion_functions_for_VXM import  gl_string_ags, genotype_ags, allele_code_ags, unosagslist, convert_allele_list_to_ags
 
 
 UA_eq_dict = {}
@@ -29,6 +29,54 @@ for row in UNOS_UA_eq_file:
 		ua_ag_eqs = list(filter(None, ua_ag_eqs))
 		UA_eq_dict[ua_ag] = ua_ag_eqs
 #print(UA_eq_dict)
+
+
+def vxm_uags(donorags, candidateags):
+	conflicts = []
+
+	UA_list = []
+	for ag in candidateags:
+		if ag in UA_eq_dict.keys():
+			UA_list.append(UA_eq_dict[ag])
+		else:
+			UA_list.append([ag])	
+
+
+	recepient_ags = [item for sublist in UA_list for item in sublist]
+
+
+
+	for ag in donorags:
+		if ag in recepient_ags:
+			conflicts.append(ag)
+
+	return (donorags, recepient_ags, conflicts)
+
+
+def vxm_hIresalleles(donorsAlleleList, candidateags):
+	conflicts = []
+	donorags = []
+
+	UA_list = []
+	
+
+	for ag in candidateags:
+		if ag in UA_eq_dict.keys():
+			UA_list.append(UA_eq_dict[ag])
+		else:
+			UA_list.append([ag])	
+
+
+	recepient_ags = [item for sublist in UA_list for item in sublist]
+
+	donorags = convert_allele_list_to_ags(donorsAlleleList)
+
+	for ag in donorags:
+		if ag in recepient_ags:
+			conflicts.append(ag)
+
+	return(donorags, recepient_ags, conflicts)
+
 
 def vxm_gls(donor_gl_string, donor_ethnicity, recipient_UA_list):
 	conflicts = []

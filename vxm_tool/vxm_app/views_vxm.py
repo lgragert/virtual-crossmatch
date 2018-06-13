@@ -8,7 +8,7 @@ from conversion_functions_for_VXM import gl_string_ags, genotype_ags, allele_cod
 
 import virtual_crossmatch
 
-from virtual_crossmatch import vxm_gls, vxm_allele_codes
+from virtual_crossmatch import vxm_gls, vxm_allele_codes, vxm_uags, vxm_hIresalleles
 
 pop_acro_dict = {"AFA": "African American", "API": "Asia/Pacific Islander", "CAU": "Caucasian", "HIS": "Hispanic", 
 "NAM": "Native American", "AAFA": "African American", "AFB": "African Black",  "AINDI": "South Asian Indian", 
@@ -20,40 +20,66 @@ pop_acro_dict = {"AFA": "African American", "API": "Asia/Pacific Islander", "CAU
 "SCSEAI": "South East Asian", "VIET": "Vietnamese"}
 
 
+######################################################################################################################################
+
+
 def vxm_home(request):
 	return render(request, 'vxm_app/vxmHome.html')
+
+#######################################################################################################################################
 
 def victor_license(request):
     return render(request, 'vxm_app/victor_license.html')
 
+#######################################################################################################################################
+
 def unos_ags(request):
 	return render(request, 'vxm_app/uagsVxm.html')
+
+######################################################################################################################################
 
 def highres_allele(request):
 	return render(request, 'vxm_app/highRESallele.html')	
 
+######################################################################################################################################
 
 def gl_string(request):
     return render(request, 'vxm_app/glsVxm.html')
 
+#######################################################################################################################################
 
 def multiple_allele_codes(request):
 	return render(request, 'vxm_app/macVxm.html')
 
+##########################################################################################################################################
 
 def match_ags(request):
 	donorAgs = request.GET['userinput1'].strip()
+
+	donorAgs = re.split(r'[;,\s]\s*' , donorAgs)
+
+	print(type(donorAgs))
 	recepientAgs = request.GET['userinput2'].strip()
+	print(type(recepientAgs))
 
-	if len(recepientAntigens) == 0:
-		recepientAntigens = []
+	if len(recepientAgs) == 0:
+		recepientAgs = []
 	else:
-		recepientAntigens = re.split(r'[;,\s]\s*' , recepientAntigens)
+		recepientAgs = re.split(r'[;,\s]\s*' , recepientAgs)
+	vxm_output = vxm_uags(donorAgs, recepientAgs)
+	dags = ', '.join(sorted(vxm_output[0]))
+	rags = ', '.join(sorted(vxm_output[1]))
+	
+	conflicts = ', '.join(sorted(vxm_output[2]))
+	
+	if len(conflicts) == 0:
+		end_result = "Virtual Crossmatch is Negative"
+	else:
+		end_result = "Virtual Crossmatch is Positive Because of Following Conflicting Antigens"	
+	return render(request, 'vxm_app/vxmUAGSmatch.html', {
+		'donor_typing': dags, 'candidate_ags': rags, 'conflicted_ag': conflicts, "output3": end_result})
 
-
-
-
-
+#############################################################################################################################################
 
 def match_gl(request):
 	donorTyping = request.GET['userinput1']
@@ -92,6 +118,7 @@ def match_gl(request):
 		'output3': end_result, "conflicts": conflicted_ag, "vxm_probs": ag_probabilities, 'zipped_list': zip(cags, cag_probs)})
 
 
+###################################################################################################################################################################
 
 
 def match_ac(request):
