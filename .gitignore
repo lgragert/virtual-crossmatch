@@ -23,3 +23,5 @@ __pycache__/*
 *.egg-info
 
 /extras
+
+/vendor_files

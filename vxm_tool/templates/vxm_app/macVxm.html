@@ -10,31 +10,36 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
-    <nav class="navbar sticky-top navbar-expand-sm" style="background-color: #336699;">
-    <div class="text-center container" >
-        <a class="navbar-brand text-white" href="{% url 'victor_home' %}"> TransplantToolbox  </a>
+    <nav class="navbar sticky-top navbar-expand-sm justify-content-center" style="background-color: #003399;">
+    <div class="nav" >
+        <a class="navbar-brand text-white h1" href="{% url 'victor_home' %}"> TransplantToolbox  </a>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
           <div class="collapse navbar-collapse" id="navbarNav">
              <ul class="nav nav-fill nav-pills">
                 <li class="nav-item active">
-                   <a class=" text-center nav-link text-white" href="{% url 'victor_home' %}"> Home </a> 
+                   <a class=" text-center nav-link text-white h5" href="{% url 'victor_home' %}"> Home </a> 
                  </li>
-                
-                <li class="nav-item active">
-                  <a class="nav-link text-white" href="{% url 'glsvxm' %}"> Genotype List Strings</a>
+                 <li class="nav-item active">
+                  <a class="nav-link text-white h5" href="{}"> UNOS Antigen Equivalents</a>
+                </li>
+                 <li class="nav-item active">
+                  <a class="nav-link text-white h5" href="{}"> High Resolution Alleles </a>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link text-white" href="{% url 'macvxm' %}"> Multiple Allele Codes </a>
+                  <a class="nav-link text-white h5" href="{% url 'glsvxm' %}"> Genotype List Strings</a>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link text-white" href="{% url 'victor_license' %}"> License </a>
+                  <a class="nav-link text-white h5" href="{% url 'macvxm' %}"> Multiple Allele Codes </a>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link text-white" href="http://www.transplanttoolbox.org/"> ALLAN</a>
+                  <a class="nav-link text-white h5" href="{% url 'victor_license' %}"> License </a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link text-white h5" href="http://www.transplanttoolbox.org/"> ALLAN</a>
                 </li>
     </ul>
     </div>
-    </nav>            
+    </nav>                 
 
 <body> 
 <div class="container text-center  pt-4 pb-4 mt-5">
@@ -106,7 +111,7 @@
     <br>
     
 </div>
-<div class="jumbotron text-white mt-5 pt-2 pb-2" style="background-color: #336699;"> 
+<div class="jumbotron text-white mt-5 pt-2 pb-2" style="background-color: #003399;"> 
 <h3 class="container text-center font-italic" > Contact Us </h3>
     <p class="container text-center font-italic"> For scientific and technical queries contact pathologygragertlab@tulane.edu.  </p>
      <br>

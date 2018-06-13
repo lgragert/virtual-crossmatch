@@ -26,12 +26,34 @@ def vxm_home(request):
 def victor_license(request):
     return render(request, 'vxm_app/victor_license.html')
 
+def unos_ags(request):
+	return render(request, 'vxm_app/uagsVxm.html')
+
+def highres_allele(request):
+	return render(request, 'vxm_app/highRESallele.html')	
+
+
 def gl_string(request):
     return render(request, 'vxm_app/glsVxm.html')
 
 
 def multiple_allele_codes(request):
 	return render(request, 'vxm_app/macVxm.html')
+
+
+def match_ags(request):
+	donorAgs = request.GET['userinput1'].strip()
+	recepientAgs = request.GET['userinput2'].strip()
+
+	if len(recepientAntigens) == 0:
+		recepientAntigens = []
+	else:
+		recepientAntigens = re.split(r'[;,\s]\s*' , recepientAntigens)
+
+
+
+
+
 
 def match_gl(request):
 	donorTyping = request.GET['userinput1']

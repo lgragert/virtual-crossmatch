@@ -5,6 +5,8 @@ from vxm_app import views_vxm
 
 urlpatterns = [
     path('', views_vxm.vxm_home, name="victor_home"),
+    path('unosags/', views_vxm.unos_ags, name="unosags"),
+    path('highresallele/', views_vxm.highres_allele, name="highresallele"),
     path('glsvxm/', views_vxm.gl_string, name="glsvxm"),
     path('matchgls/', views_vxm.match_gl, name="matchgls"),
     path('macvxm/', views_vxm.multiple_allele_codes, name="macvxm"),
