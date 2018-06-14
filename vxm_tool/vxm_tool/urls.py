@@ -8,6 +8,7 @@ urlpatterns = [
     path('unosags/', views_vxm.unos_ags, name="unosags"),
     path('matchuags/', views_vxm.match_ags, name="uagsvxm"),
     path('highresallele/', views_vxm.highres_allele, name="highresallele"),
+    path('matchhiresallele/', views_vxm.match_hi_res_alleles, name="matchallele"),
     path('glsvxm/', views_vxm.gl_string, name="glsvxm"),
     path('matchgls/', views_vxm.match_gl, name="matchgls"),
     path('macvxm/', views_vxm.multiple_allele_codes, name="macvxm"),

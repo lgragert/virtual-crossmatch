@@ -20,33 +20,33 @@ pop_acro_dict = {"AFA": "African American", "API": "Asia/Pacific Islander", "CAU
 "SCSEAI": "South East Asian", "VIET": "Vietnamese"}
 
 
-######################################################################################################################################
+#########################################################################################################################################
 
 
 def vxm_home(request):
 	return render(request, 'vxm_app/vxmHome.html')
 
-#######################################################################################################################################
+#########################################################################################################################################
 
 def victor_license(request):
     return render(request, 'vxm_app/victor_license.html')
 
-#######################################################################################################################################
+########################################################################################################################################
 
 def unos_ags(request):
 	return render(request, 'vxm_app/uagsVxm.html')
 
-######################################################################################################################################
+########################################################################################################################################
 
 def highres_allele(request):
 	return render(request, 'vxm_app/highRESallele.html')	
 
-######################################################################################################################################
+########################################################################################################################################
 
 def gl_string(request):
     return render(request, 'vxm_app/glsVxm.html')
 
-#######################################################################################################################################
+########################################################################################################################################
 
 def multiple_allele_codes(request):
 	return render(request, 'vxm_app/macVxm.html')
@@ -55,17 +55,16 @@ def multiple_allele_codes(request):
 
 def match_ags(request):
 	donorAgs = request.GET['userinput1'].strip()
-
 	donorAgs = re.split(r'[;,\s]\s*' , donorAgs)
 
-	print(type(donorAgs))
+	
 	recepientAgs = request.GET['userinput2'].strip()
-	print(type(recepientAgs))
-
 	if len(recepientAgs) == 0:
 		recepientAgs = []
 	else:
 		recepientAgs = re.split(r'[;,\s]\s*' , recepientAgs)
+	
+
 	vxm_output = vxm_uags(donorAgs, recepientAgs)
 	dags = ', '.join(sorted(vxm_output[0]))
 	rags = ', '.join(sorted(vxm_output[1]))
@@ -78,6 +77,61 @@ def match_ags(request):
 		end_result = "Virtual Crossmatch is Positive Because of Following Conflicting Antigens"	
 	return render(request, 'vxm_app/vxmUAGSmatch.html', {
 		'donor_typing': dags, 'candidate_ags': rags, 'conflicted_ag': conflicts, "output3": end_result})
+
+############################################################################################################################################################
+
+
+
+def match_hi_res_alleles(request):
+
+	donor_typing = request.GET['userinput1'].strip()
+	donor_alleles_list = re.split(r'[;,\s]\s*' , donor_typing)
+
+
+	recepientAgs = request.GET['userinput2'].strip()
+	if len(recepientAgs) == 0:
+		recepientAgs = []
+	else:
+		recepientAgs = re.split(r'[;,\s]\s*' , recepientAgs) 	
+
+	vxm_output = vxm_hIresalleles(donor_alleles_list, recepientAgs)
+
+	dags = ', '.join(sorted(vxm_output[0]))
+	rags = ', '.join(sorted(vxm_output[1]))
+
+	conflicts = ', '.join(sorted(vxm_output[2]))
+
+
+	if len(conflicts) == 0:
+		end_result = "Virtual Crossmatch is Negative"
+	else:
+		end_result = "Virtual Crossmatch is Positive Because of Following Conflicting Antigens"	
+
+
+	return render(request, 'vxm_app/vxmAllelematch.html', {'donor_alleles': donor_typing,
+		'donor_antigens': dags, 'candidate_ags': rags, 'conflicted_ag': conflicts, "output3": end_result})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #############################################################################################################################################
 
