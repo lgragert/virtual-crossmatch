@@ -10,6 +10,9 @@ from hla import allele_truncate, locus_string_geno_list, expand_ac, single_locus
 import conversion_functions_for_VXM
 from conversion_functions_for_VXM import  gl_string_ags, genotype_ags, allele_code_ags, unosagslist, convert_allele_list_to_ags
 
+import reverse_conversion
+
+from reverse_conversion import map_single_ag_to_alleles
 
 UA_eq_dict = {}
 
@@ -33,7 +36,7 @@ for row in UNOS_UA_eq_file:
 
 def vxm_uags(donorags, candidateags):
 	conflicts = []
-
+	donor_ags_alleles = []
 	UA_list = []
 	for ag in candidateags:
 		if ag in UA_eq_dict.keys():
@@ -45,9 +48,16 @@ def vxm_uags(donorags, candidateags):
 	recepient_ags = [item for sublist in UA_list for item in sublist]
 
 
-
 	for ag in donorags:
-		if ag in recepient_ags:
+		alleles = map_single_ag_to_alleles(ag)
+		donor_ags_alleles.append([ag])
+		if alleles:
+			donor_ags_alleles.append(alleles)
+	
+	merged_dags_alleles = list(itertools.chain(*donor_ags_alleles))
+
+	for ag in recepient_ags:
+		if ag in merged_dags_alleles:
 			conflicts.append(ag)
 
 	return (donorags, recepient_ags, conflicts)

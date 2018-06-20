@@ -81,7 +81,14 @@ for ag in ag_to_allele_dict.keys():
 #print(final_dict)
 
 def map_single_ag_to_alleles(antigen):
+	allele_list = {}
+	allele_only_list = []
 	if antigen in final_dict:
 		allele_list = final_dict[antigen]
+	
+	for i in allele_list.values():
+		allele_only_list.append(i)
 
-	return allele_list 	
+	flat_list = [item for sublist in allele_only_list for item in sublist]	
+	flat_list = [item for sublist in flat_list for item in sublist]
+	return flat_list
