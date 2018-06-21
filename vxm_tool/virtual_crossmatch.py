@@ -3,12 +3,12 @@
 
 import os, re
 import requests
-import hla 
+import vxm_hla 
 import itertools
-from hla import allele_truncate, locus_string_geno_list, expand_ac, single_locus_allele_codes_genotype
+from vxm_hla import allele_truncate, locus_string_geno_list, expand_ac, single_locus_allele_codes_genotype, gl_string_alleles_list
 
 import conversion_functions_for_VXM
-from conversion_functions_for_VXM import  gl_string_ags, genotype_ags, allele_code_ags, unosagslist, convert_allele_list_to_ags
+from conversion_functions_for_VXM import  gl_string_ags, genotype_ags, allele_code_ags, unosagslist, convert_allele_list_to_ags, allele_freq
 
 import reverse_conversion
 
@@ -81,8 +81,10 @@ def vxm_hIresalleles(donorsAlleleList, candidateags):
 
 	donorags = convert_allele_list_to_ags(donorsAlleleList)
 
-	for ag in donorags:
-		if ag in recepient_ags:
+	donorags_alleles = donorsAlleleList + donorags
+	
+	for ag in recepient_ags:
+		if ag in donorags_alleles:
 			conflicts.append(ag)
 
 	return(donorags, recepient_ags, conflicts)
@@ -93,6 +95,7 @@ def vxm_gls(donor_gl_string, donor_ethnicity, recipient_UA_list):
 	ag_probs = {}
 	donor_ags = []
 	output = gl_string_ags(donor_gl_string, donor_ethnicity)
+	
 	for i in output:
 		ag_list = i[0].split("+")
 		for j in ag_list:
@@ -100,7 +103,11 @@ def vxm_gls(donor_gl_string, donor_ethnicity, recipient_UA_list):
 				ag_probs[j] += i[1]
 			else:
 				ag_probs[j] = i[1]
-	print(ag_probs)
+	
+	donor_alleles = vxm_hla.gl_string_alleles_list(donor_gl_string)
+	#print(donor_alleles)
+	donor_allele_freqs = conversion_functions_for_VXM.allele_freq(donor_alleles, donor_ethnicity)
+	#print(donor_allele_freqs)
 
 	for k in ag_probs.keys():
 		donor_ags.append(k)
@@ -116,23 +123,30 @@ def vxm_gls(donor_gl_string, donor_ethnicity, recipient_UA_list):
 	recepient_ags = [item for sublist in UA_list for item in sublist]
 
 
-
-	for ag in donor_ags:
-		if ag in recepient_ags:
+	donor_alleles_ags = donor_ags + donor_alleles
+	
+	for ag in recepient_ags:
+		if ag in donor_alleles_ags:
 			conflicts.append(ag)
 		
 	conflict_ag_probs = {}
 
 	for i in conflicts:
-		conflict_ag_probs[i] = ag_probs[i]
+		if i in ag_probs.keys():
+			conflict_ag_probs[i] = round(ag_probs[i], 4)
 
+		elif i in donor_allele_freqs.keys():
+			conflict_ag_probs[i] = round(donor_allele_freqs[i], 4)
 
+		else:
+			conflict_ag_probs[i] = 0	
+	
 	for i,j in conflict_ag_probs.items():
 		if j > 1.00:
 			j = 1.00
 			conflict_ag_probs[i] = j
 
-	print(conflict_ag_probs)
+	#print(conflict_ag_probs)
 
 
 	return(donor_ags, recepient_ags, conflicts, conflict_ag_probs)

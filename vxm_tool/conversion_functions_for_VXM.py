@@ -5,8 +5,8 @@ import re
 import requests   
 import operator
 import glob
-import hla
-from hla import allele_truncate, locus_string_geno_list, expand_ac, single_locus_allele_codes_genotype
+import vxm_hla
+from vxm_hla import allele_truncate, locus_string_geno_list, expand_ac, single_locus_allele_codes_genotype
 
 allele_to_ag_dict = {}
 population_allele_frequencies = {}
@@ -28,7 +28,7 @@ for row in UNOS_conversion_table_file:
 		continue 
 	else:
 		allele = row.split(',')[0]
-		allele_4d = hla.allele_truncate(allele)
+		allele_4d = vxm_hla.allele_truncate(allele)
 		antigen = row.split(',')[1]
 		unosEQags.append(antigen)
 		rule = row.split(',') [2]
@@ -84,7 +84,7 @@ for file in glob.glob('*.freqs'):
 				else:
 					population_allele_frequencies[pop][allele] = float(haplotype_frequency)	
 
-
+#print(population_allele_frequencies)
 def convert_allele_list_to_ags(hla_allele_list):
 	
 	"""This function can be called if a list of alleles has to be converted to antigens. Input format is a list and 
@@ -134,7 +134,7 @@ def gl_string_ags(gl_string, pop):
 		print("One locus typing")
 		geno_antigen_freq = {}
 		a_locus = locus_split[0]
-		a_genotype_list = hla.locus_string_geno_list(a_locus)
+		a_genotype_list = vxm_hla.locus_string_geno_list(a_locus)
 		a_ags = genotype_ags(a_genotype_list,pop)
 		ag_list = a_ags  
 
@@ -146,11 +146,11 @@ def gl_string_ags(gl_string, pop):
 		print("Two locus typing")
 		geno_antigen_freq = {}
 		a_locus = locus_split[0]
-		a_genotype_list = hla.locus_string_geno_list(a_locus)
+		a_genotype_list = vxm_hla.locus_string_geno_list(a_locus)
 		a_ags = genotype_ags(a_genotype_list,pop)
 		geno_antigen_freq = {}
 		b_locus = locus_split[1]
-		b_genotype_list = hla.locus_string_geno_list(b_locus)
+		b_genotype_list = vxm_hla.locus_string_geno_list(b_locus)
 		b_ags = genotype_ags(b_genotype_list,pop)
 		ag_list = a_ags  + b_ags 
 
@@ -162,15 +162,15 @@ def gl_string_ags(gl_string, pop):
 		print("Three locus typing")
 		geno_antigen_freq = {}
 		a_locus = locus_split[0]
-		a_genotype_list = hla.locus_string_geno_list(a_locus)
+		a_genotype_list = vxm_hla.locus_string_geno_list(a_locus)
 		a_ags = genotype_ags(a_genotype_list,pop)
 		geno_antigen_freq = {}
 		b_locus = locus_split[1]
-		b_genotype_list = hla.locus_string_geno_list(b_locus)
+		b_genotype_list = vxm_hla.locus_string_geno_list(b_locus)
 		b_ags = genotype_ags(b_genotype_list,pop)
 		geno_antigen_freq = {}
 		c_locus = locus_split[2]
-		c_genotype_list = hla.locus_string_geno_list(c_locus)
+		c_genotype_list = vxm_hla.locus_string_geno_list(c_locus)
 		c_ags = genotype_ags(c_genotype_list,pop)
 		ag_list = a_ags  + b_ags + c_ags
 	
@@ -180,19 +180,19 @@ def gl_string_ags(gl_string, pop):
 		print("Four locus typing")
 		geno_antigen_freq = {}
 		a_locus = locus_split[0]
-		a_genotype_list = hla.locus_string_geno_list(a_locus)
+		a_genotype_list = vxm_hla.locus_string_geno_list(a_locus)
 		a_ags = genotype_ags(a_genotype_list,pop)
 		geno_antigen_freq = {}
 		b_locus = locus_split[1]
-		b_genotype_list = hla.locus_string_geno_list(b_locus)
+		b_genotype_list = vxm_hla.locus_string_geno_list(b_locus)
 		b_ags = genotype_ags(b_genotype_list,pop)
 		geno_antigen_freq = {}
 		c_locus = locus_split[2]
-		c_genotype_list = hla.locus_string_geno_list(c_locus)
+		c_genotype_list = vxm_hla.locus_string_geno_list(c_locus)
 		c_ags = genotype_ags(c_genotype_list,pop)
 		geno_antigen_freq = {}
 		dr_locus = locus_split[3]
-		dr_genotype_list = hla.locus_string_geno_list(dr_locus)
+		dr_genotype_list = vxm_hla.locus_string_geno_list(dr_locus)
 		dr_ags = genotype_ags(dr_genotype_list,pop)
 		ag_list = a_ags  + b_ags  + c_ags  + dr_ags
 
@@ -201,23 +201,23 @@ def gl_string_ags(gl_string, pop):
 		print("Five locus typing")
 		geno_antigen_freq = {}
 		a_locus = locus_split[0]
-		a_genotype_list = hla.locus_string_geno_list(a_locus)
+		a_genotype_list = vxm_hla.locus_string_geno_list(a_locus)
 		a_ags = genotype_ags(a_genotype_list,pop)
 		geno_antigen_freq = {}
 		b_locus = locus_split[1]
-		b_genotype_list = hla.locus_string_geno_list(b_locus)
+		b_genotype_list = vxm_hla.locus_string_geno_list(b_locus)
 		b_ags = genotype_ags(b_genotype_list,pop)
 		geno_antigen_freq = {}
 		c_locus = locus_split[2]
-		c_genotype_list = hla.locus_string_geno_list(c_locus)
+		c_genotype_list = vxm_hla.locus_string_geno_list(c_locus)
 		c_ags = genotype_ags(c_genotype_list,pop)
 		geno_antigen_freq = {}
 		dr_locus = locus_split[3]
-		dr_genotype_list = hla.locus_string_geno_list(dr_locus)
+		dr_genotype_list = vxm_hla.locus_string_geno_list(dr_locus)
 		dr_ags = genotype_ags(dr_genotype_list,pop)
 		geno_antigen_freq = {}
 		dqb_locus = locus_split[4]
-		dqb_genotype_list = hla.locus_string_geno_list(dqb_locus)
+		dqb_genotype_list = vxm_hla.locus_string_geno_list(dqb_locus)
 		dqb_ags = genotype_ags(dqb_genotype_list,pop)
 		ag_list = a_ags  + b_ags  + c_ags   + dr_ags  + dqb_ags
 
@@ -228,27 +228,27 @@ def gl_string_ags(gl_string, pop):
 		print("Six locus typing")
 		geno_antigen_freq = {}
 		a_locus = locus_split[0]
-		a_genotype_list = hla.locus_string_geno_list(a_locus)
+		a_genotype_list = vxm_hla.locus_string_geno_list(a_locus)
 		a_ags = genotype_ags(a_genotype_list,pop)
 		geno_antigen_freq = {}
 		b_locus = locus_split[1]
-		b_genotype_list = hla.locus_string_geno_list(b_locus)
+		b_genotype_list = vxm_hla.locus_string_geno_list(b_locus)
 		b_ags = genotype_ags(b_genotype_list,pop)
 		geno_antigen_freq = {}
 		c_locus = locus_split[2]
-		c_genotype_list = hla.locus_string_geno_list(c_locus)
+		c_genotype_list = vxm_hla.locus_string_geno_list(c_locus)
 		c_ags = genotype_ags(c_genotype_list,pop)
 		geno_antigen_freq = {}
 		dr_locus = locus_split[3]
-		dr_genotype_list = hla.locus_string_geno_list(dr_locus)
+		dr_genotype_list = vxm_hla.locus_string_geno_list(dr_locus)
 		dr_ags = genotype_ags(dr_genotype_list,pop)
 		geno_antigen_freq = {}
 		dqb_locus = locus_split[4]
-		dqb_genotype_list = hla.locus_string_geno_list(dqb_locus)
+		dqb_genotype_list = vxm_hla.locus_string_geno_list(dqb_locus)
 		dqb_ags = genotype_ags(dqb_genotype_list,pop)
 		geno_antigen_freq = {}
 		dr345_locus = locus_split[5]
-		dr345_genotype_list = hla.locus_string_geno_list(dr345_locus)
+		dr345_genotype_list = vxm_hla.locus_string_geno_list(dr345_locus)
 		dr345_ags = genotype_ags(dr345_genotype_list,pop)
 		ag_list = a_ags + "," + b_ags + "," + c_ags  + "," + dr_ags + "," + dqb_ags + "," + dr345_ags
 	#print(ag_list)
@@ -268,11 +268,11 @@ def genotype_ags(genotype_list, pop):
 	for genotype in genotype_list:
 		allele_1 = genotype.split("+")[0]
 		allele_1 = allele_1.rstrip("g p P G")
-		allele_1 = hla.allele_truncate(allele_1)
+		allele_1 = vxm_hla.allele_truncate(allele_1)
 
 		allele_2 = genotype.split("+")[1]
 		allele_2 = allele_2.rstrip("g p P G")
-		allele_2 = hla.allele_truncate(allele_2)
+		allele_2 = vxm_hla.allele_truncate(allele_2)
 
 		ag_1 = allele_to_ag_dict[allele_1][0]
 		bw46_1 = allele_to_ag_dict[allele_1][2]
@@ -339,6 +339,16 @@ def genotype_ags(genotype_list, pop):
 	#bw46_list = bw46_1	+ "," + bw46_2
 	return (sorted_gf)
 
+def allele_freq(allele_list, pop):
+	allele_pop_freqs = {}
+	for i in allele_list:
+		if i in population_allele_frequencies[pop]:
+			allele_pop_freqs[i] = population_allele_frequencies[pop][i]
+		else: 
+			allele_pop_freqs[i] = 0	
+
+	return allele_pop_freqs	
+
 
 def allele_code_ags(allele_codes_list, pop):
 
@@ -355,7 +365,7 @@ def allele_code_ags(allele_codes_list, pop):
 		A_2_code = allele_codes_list[1]
 		A_codes_pair = [A_1_code, A_2_code]
 		geno_antigen_freq = {}
-		acodes_genotype = hla.single_locus_allele_codes_genotype(A_codes_pair)
+		acodes_genotype = vxm_hla.single_locus_allele_codes_genotype(A_codes_pair)
 		a_ags = genotype_ags(acodes_genotype, pop)
 		ag_list = a_ags  
 
@@ -367,14 +377,14 @@ def allele_code_ags(allele_codes_list, pop):
 		A_2_code = allele_codes_list[1]
 		A_codes_pair = [A_1_code, A_2_code]
 		geno_antigen_freq = {}
-		acodes_genotype = hla.single_locus_allele_codes_genotype(A_codes_pair)
+		acodes_genotype = vxm_hla.single_locus_allele_codes_genotype(A_codes_pair)
 		a_ags = genotype_ags(acodes_genotype, pop)
 
 		C_1_code = allele_codes_list[2]
 		C_2_code = allele_codes_list[3]
 		C_codes_pair = [C_1_code, C_2_code]
 		geno_antigen_freq = {}
-		ccodes_genotype = hla.single_locus_allele_codes_genotype(C_codes_pair)
+		ccodes_genotype = vxm_hla.single_locus_allele_codes_genotype(C_codes_pair)
 		c_ags = genotype_ags(ccodes_genotype, pop)
 
 		ag_list = a_ags  + c_ags  
@@ -389,21 +399,21 @@ def allele_code_ags(allele_codes_list, pop):
 		A_2_code = allele_codes_list[1]
 		A_codes_pair = [A_1_code, A_2_code]
 		geno_antigen_freq = {}
-		acodes_genotype = hla.single_locus_allele_codes_genotype(A_codes_pair)
+		acodes_genotype = vxm_hla.single_locus_allele_codes_genotype(A_codes_pair)
 		a_ags = genotype_ags(acodes_genotype, pop)
 
 		C_1_code = allele_codes_list[2]
 		C_2_code = allele_codes_list[3]
 		C_codes_pair = [C_1_code, C_2_code]
 		geno_antigen_freq = {}
-		ccodes_genotype = hla.single_locus_allele_codes_genotype(C_codes_pair)
+		ccodes_genotype = vxm_hla.single_locus_allele_codes_genotype(C_codes_pair)
 		c_ags = genotype_ags(ccodes_genotype, pop)
 
 		B_1_code = allele_codes_list[4]
 		B_2_code = allele_codes_list[5]
 		B_codes_pair = [B_1_code, B_2_code]
 		geno_antigen_freq = {}
-		bcodes_genotype = hla.single_locus_allele_codes_genotype(B_codes_pair)
+		bcodes_genotype = vxm_hla.single_locus_allele_codes_genotype(B_codes_pair)
 		b_ags = genotype_ags(bcodes_genotype, pop)
 		
 		ag_list = a_ags  + b_ags  + c_ags
@@ -415,28 +425,28 @@ def allele_code_ags(allele_codes_list, pop):
 		A_2_code = allele_codes_list[1]
 		A_codes_pair = [A_1_code, A_2_code]
 		geno_antigen_freq = {}
-		acodes_genotype = hla.single_locus_allele_codes_genotype(A_codes_pair)
+		acodes_genotype = vxm_hla.single_locus_allele_codes_genotype(A_codes_pair)
 		a_ags = genotype_ags(acodes_genotype, pop)
 
 		C_1_code = allele_codes_list[2]
 		C_2_code = allele_codes_list[3]
 		C_codes_pair = [C_1_code, C_2_code]
 		geno_antigen_freq = {}
-		ccodes_genotype = hla.single_locus_allele_codes_genotype(C_codes_pair)
+		ccodes_genotype = vxm_hla.single_locus_allele_codes_genotype(C_codes_pair)
 		b_ags = genotype_ags(ccodes_genotype, pop)
 
 		B_1_code = allele_codes_list[4]
 		B_2_code = allele_codes_list[5]
 		B_codes_pair = [B_1_code, B_2_code]
 		geno_antigen_freq = {}
-		bcodes_genotype = hla.single_locus_allele_codes_genotype(B_codes_pair)
+		bcodes_genotype = vxm_hla.single_locus_allele_codes_genotype(B_codes_pair)
 		c_ags = genotype_ags(bcodes_genotype, pop)
 			
 		dr_1_code = allele_codes_list[6]
 		dr_2_code = allele_codes_list[7]
 		dr_codes_pair = [dr_1_code, dr_2_code]
 		geno_antigen_freq = {}
-		drcodes_genotype = hla.single_locus_allele_codes_genotype(dr_codes_pair)
+		drcodes_genotype = vxm_hla.single_locus_allele_codes_genotype(dr_codes_pair)
 		dr_ags = genotype_ags(drcodes_genotype, pop)
 
 		ag_list = a_ags  + b_ags + c_ags  + dr_ags
@@ -448,35 +458,35 @@ def allele_code_ags(allele_codes_list, pop):
 		A_2_code = allele_codes_list[1]
 		A_codes_pair = [A_1_code, A_2_code]
 		geno_antigen_freq = {}
-		acodes_genotype = hla.single_locus_allele_codes_genotype(A_codes_pair)
+		acodes_genotype = vxm_hla.single_locus_allele_codes_genotype(A_codes_pair)
 		a_ags = genotype_ags(acodes_genotype, pop)
 
 		C_1_code = allele_codes_list[2]
 		C_2_code = allele_codes_list[3]
 		C_codes_pair = [C_1_code, C_2_code]
 		geno_antigen_freq = {}
-		ccodes_genotype = hla.single_locus_allele_codes_genotype(C_codes_pair)
+		ccodes_genotype = vxm_hla.single_locus_allele_codes_genotype(C_codes_pair)
 		c_ags = genotype_ags(ccodes_genotype, pop)
 
 		B_1_code = allele_codes_list[4]
 		B_2_code = allele_codes_list[5]
 		B_codes_pair = [B_1_code, B_2_code]
 		geno_antigen_freq = {}
-		bcodes_genotype = hla.single_locus_allele_codes_genotype(B_codes_pair)
+		bcodes_genotype = vxm_hla.single_locus_allele_codes_genotype(B_codes_pair)
 		b_ags = genotype_ags(bcodes_genotype, pop)
 			
 		dr_1_code = allele_codes_list[6]
 		dr_2_code = allele_codes_list[7]
 		dr_codes_pair = [dr_1_code, dr_2_code]
 		geno_antigen_freq = {}
-		drcodes_genotype = hla.single_locus_allele_codes_genotype(dr_codes_pair)
+		drcodes_genotype = vxm_hla.single_locus_allele_codes_genotype(dr_codes_pair)
 		dr_ags = genotype_ags(drcodes_genotype, pop)	
 		
 		dqb_1_code = allele_codes_list[8]
 		dqb_2_code = allele_codes_list[9]
 		dqb_codes_pair = [dqb_1_code, dqb_2_code]
 		geno_antigen_freq = {}
-		dqbcodes_genotype = hla.single_locus_allele_codes_genotype(dqb_codes_pair)
+		dqbcodes_genotype = vxm_hla.single_locus_allele_codes_genotype(dqb_codes_pair)
 		dqb_ags = genotype_ags(dqbcodes_genotype, pop)
 
 		ag_list = a_ags  + b_ags  + c_ags + dr_ags  + dqb_ags
@@ -488,35 +498,35 @@ def allele_code_ags(allele_codes_list, pop):
 		A_2_code = allele_codes_list[1]
 		A_codes_pair = [A_1_code, A_2_code]
 		geno_antigen_freq = {}
-		acodes_genotype = hla.single_locus_allele_codes_genotype(A_codes_pair)
+		acodes_genotype = vxm_hla.single_locus_allele_codes_genotype(A_codes_pair)
 		a_ags = genotype_ags(acodes_genotype, pop)
 
 		C_1_code = allele_codes_list[2]
 		C_2_code = allele_codes_list[3]
 		C_codes_pair = [C_1_code, C_2_code]
 		geno_antigen_freq = {}
-		ccodes_genotype = hla.single_locus_allele_codes_genotype(C_codes_pair)
+		ccodes_genotype = vxm_hla.single_locus_allele_codes_genotype(C_codes_pair)
 		c_ags = genotype_ags(ccodes_genotype, pop)
 
 		B_1_code = allele_codes_list[4]
 		B_2_code = allele_codes_list[5]
 		B_codes_pair = [B_1_code, B_2_code]
 		geno_antigen_freq = {}
-		bcodes_genotype = hla.single_locus_allele_codes_genotype(B_codes_pair)
+		bcodes_genotype = vxm_hla.single_locus_allele_codes_genotype(B_codes_pair)
 		b_ags = genotype_ags(bcodes_genotype, pop)
 			
 		dr_1_code = allele_codes_list[6]
 		dr_2_code = allele_codes_list[7]
 		dr_codes_pair = [dr_1_code, dr_2_code]
 		geno_antigen_freq = {}
-		drcodes_genotype = hla.single_locus_allele_codes_genotype(dr_codes_pair)
+		drcodes_genotype = vxm_hla.single_locus_allele_codes_genotype(dr_codes_pair)
 		dr_ags = genotype_ags(drcodes_genotype, pop)	
 		
 		dqb_1_code = allele_codes_list[8]
 		dqb_2_code = allele_codes_list[9]
 		dqb_codes_pair = [dqb_1_code, dqb_2_code]
 		geno_antigen_freq = {}
-		dqbcodes_genotype = hla.single_locus_allele_codes_genotype(dqb_codes_pair)
+		dqbcodes_genotype = vxm_hla.single_locus_allele_codes_genotype(dqb_codes_pair)
 		dqb_ags = genotype_ags(dqbcodes_genotype, pop)
 							
 
@@ -524,7 +534,7 @@ def allele_code_ags(allele_codes_list, pop):
 		dr345_2_code = allele_codes_list[11]
 		dr345_codes_pair = [dr345_1_code, dr345_2_code]
 		geno_antigen_freq = {}
-		dr345codes_genotype = hla.single_locus_allele_codes_genotype(dr345_codes_pair)
+		dr345codes_genotype = vxm_hla.single_locus_allele_codes_genotype(dr345_codes_pair)
 		dr345_ags = genotype_ags(dr345codes_genotype, pop)			
 
 

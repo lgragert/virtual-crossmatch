@@ -40,6 +40,16 @@ def locus_string_geno_list(locus_string):
 	return genotype_list
 
 
+def gl_string_alleles_list(gl_string):
+	allele_list = re.split(r'[+ | / ^]', gl_string)
+
+	final_allele_list = []
+
+	for i in allele_list:
+		x = i.rstrip("p P g G")
+		final_allele_list.append(x)
+
+	return final_allele_list	
 
 
 

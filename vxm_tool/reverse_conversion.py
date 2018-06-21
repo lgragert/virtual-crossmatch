@@ -3,8 +3,8 @@
 import os
 import re
 import requests   
-import hla
-from hla import allele_truncate
+import vxm_hla
+from vxm_hla import allele_truncate
 
 ag_to_allele_dict = {}
 UA_eq_dict = {}
@@ -34,7 +34,7 @@ for row in UNOS_conversion_table_file:
 		continue 
 	else:
 		allele = row.split(',')[0]
-		allele_4d = hla.allele_truncate(allele)
+		allele_4d = vxm_hla.allele_truncate(allele)
 		antigen = row.split(',')[1]
 		rule = row.split(',') [2]
 		bw4_6 = row.split(',')[3]
