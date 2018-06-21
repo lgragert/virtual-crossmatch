@@ -82,9 +82,16 @@ def single_locus_allele_codes_genotype(allele_code_pair_list):
                 genotype_list.append(genotype)
         return genotype_list
 
-    else:
 
-        print("Allele codes should be from same locus")    
+def allele_code_to_allele_list(allele_code_list):
+	allele_list_from_macs = []
+	for mac in allele_code_list:
+		allelesIncode = expand_ac(mac).split("/") 
+		print(allelesIncode)
+		allele_list_from_macs.append(allelesIncode)
+	
+	flat_list = [item for sublist in allele_list_from_macs for item in sublist]
+	return flat_list
 
 
 	
