@@ -1,7 +1,8 @@
 
 from django.contrib import admin
 from django.urls import path
-from vxm_app import views_vxm
+from django.conf import settings
+from vxm_app import views_vxm, views_vxm_ua
 
 urlpatterns = [
     path('', views_vxm.vxm_home, name="victor_home"),
@@ -15,5 +16,6 @@ urlpatterns = [
     path('matchmac/', views_vxm.match_ac, name="matchmac"),
     path('admin/', admin.site.urls),
     path('VICTORLICENSE/', views_vxm.victor_license, name="victor_license"),
+    path('ags_unos/', views_vxm_ua.UNOSagsApiView.as_view()),
 
 ]
