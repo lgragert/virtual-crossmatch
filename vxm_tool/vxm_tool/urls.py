@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django.urls import path
 from django.conf import settings
-from vxm_app import views_vxm, views_vxm_ua
+from vxm_app import views_vxm, views_vxm_ua, views_vxm_alleles
 
 urlpatterns = [
     path('', views_vxm.vxm_home, name="victor_home"),
@@ -17,5 +17,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('VICTORLICENSE/', views_vxm.victor_license, name="victor_license"),
     path('ags_unos/', views_vxm_ua.UNOSAgsApiView.as_view()),
+    path('victor_alleles/', views_vxm_alleles.AllelesApiView.as_view()),
+
 
 ]
