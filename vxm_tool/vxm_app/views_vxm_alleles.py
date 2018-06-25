@@ -18,14 +18,14 @@ import virtual_crossmatch
 from virtual_crossmatch import vxm_hIresalleles
 
 class AllelesApiView(generics.GenericAPIView):
-    serializer_class = serializers.AlleleSerializer
+    serializer_class = serializers.VICTOR_AlleleSerializer
 
     def post(self, request, format=None):
         """Returns UNOS antigen for an allele."""
         """parameters: 
         allele:string
         """
-        serializer = serializers.AlleleSerializer(data=request.data)    
+        serializer = serializers.VICTOR_AlleleSerializer(data=request.data)    
 
         if serializer.is_valid(raise_exception=True):
             

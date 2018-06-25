@@ -121,7 +121,9 @@ def match_gl(request):
 	donorTyping = request.GET['userinput1']
 	donorTyping = donorTyping.strip()
 	popSpec = request.GET['userinput2']
+	print(popSpec)
 	popSpecFul = pop_acro_dict[popSpec]
+	print(popSpecFul)
 	recepientAntigens = request.GET['userinput3']
 	pbTh = float(request.GET['userinput4'])
 
