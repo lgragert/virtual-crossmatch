@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django.urls import path
 from django.conf import settings
-from vxm_app import views_vxm, views_vxm_ua, views_vxm_alleles, views_vxm_gls
+from vxm_app import views_vxm, views_vxm_ua, views_vxm_alleles, views_vxm_gls, views_vxm_macs
 
 urlpatterns = [
     path('', views_vxm.vxm_home, name="victor_home"),
@@ -19,6 +19,7 @@ urlpatterns = [
     path('ags_unos/', views_vxm_ua.UNOSAgsApiView.as_view()),
     path('victor_alleles/', views_vxm_alleles.AllelesApiView.as_view()),
     path('victor_gls/', views_vxm_gls.GenotypeListStringApiView.as_view()),
+    path('victor_macs/', views_vxm_macs.MultipleAlleleCodesApiView.as_view()),
 
 
 

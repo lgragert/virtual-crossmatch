@@ -20,3 +20,9 @@ class VICTOR_GLstringSerializer(serializers.Serializer):
 	Donor_ethinicity = serializers.CharField(max_length=None)
 	Candidate_Unacceptable_antigens = serializers.CharField(max_length=None)
 	
+
+class VICTOR_MACSerializer(serializers.Serializer):
+	"""Serializes a name field for testing our APIView."""
+	Donor_Allele_Codes = serializers.CharField(max_length=None)
+	Donor_ethinicity = serializers.CharField(max_length=None)
+	Candidate_Unacceptable_antigens = serializers.CharField(max_length=None)
