@@ -16,6 +16,6 @@ urlpatterns = [
     path('matchmac/', views_vxm.match_ac, name="matchmac"),
     path('admin/', admin.site.urls),
     path('VICTORLICENSE/', views_vxm.victor_license, name="victor_license"),
-    path('ags_unos/', views_vxm_ua.UNOSagsApiView.as_view()),
+    path('ags_unos/', views_vxm_ua.UNOSAgsApiView.as_view()),
 
 ]
