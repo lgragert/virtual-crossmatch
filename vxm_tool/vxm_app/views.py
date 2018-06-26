@@ -50,7 +50,7 @@ def match_gl(request):
 	donor_ags = ', '.join(vxm_output[0])
 	print(donor_ags)
 	recepient_ags = ', '.join(vxm_output[1])
-	conflicted_ag = ', '.join(vxm_output[2])
+	conflicted_ag = ', '.join(sort(vxm_output[2]))
 	ag_probabilities = vxm_output[3]
 	print(ag_probabilities)
 	print(conflicted_ag)

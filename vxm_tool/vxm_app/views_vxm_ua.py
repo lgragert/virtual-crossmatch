@@ -46,14 +46,14 @@ class UNOSAgsApiView(generics.GenericAPIView):
             #print(len(output))
             if len(output[2]) != 0:
 
-                VXM_out = "Virtual crossmatch is positive"
+                VXM_out = "Positive"
                 conflicts =  ", ".join(output[2])
 
-                return Response({"VICTOR_VXM": VXM_out, "Donor UNOS Antigen Equivalents": Donor_ags, "Candidate Unacceptable Antigens": Candidate_unacceptable_ags, "Conflicting Antigens": conflicts, },  status=status.HTTP_200_OK)
+                return Response({"VICTOR VXM": VXM_out, "Donor UNOS Antigen Equivalents": Donor_ags, "Candidate Unacceptable Antigens": Candidate_unacceptable_ags, "Conflicting Antigens": conflicts, },  status=status.HTTP_200_OK)
 
             else: 
-                VXM_out = "Virtual crossmatch is negative"
-                return Response({"VICTOR_VXM": VXM_out, "Donor UNOS Antigen Equivalents": Donor_ags, "Candidate Unacceptable Antigens": Candidate_unacceptable_ags}, 
+                VXM_out = "Negative"
+                return Response({"VICTOR VXM": VXM_out, "Donor UNOS Antigen Equivalents": Donor_ags, "Candidate Unacceptable Antigens": Candidate_unacceptable_ags}, 
                  status=status.HTTP_200_OK)
 
 

@@ -111,11 +111,13 @@
 
 {% if conflicts %}
   <div class=" container bg-danger text-white font-weight-bold text-center w-50 p-3" role="alert"> 
-    <h2 class="alert-heading mb-0"> {{output3}} {{conflicts}}</h2> 
+    <h2 class="alert-heading mb-0"> {{output3}} </h2> 
+    <h2 class="alert-heading mb-0"> {{conflicts}} </h2> 
   </div>
 {% else %}
   <div class="bg-success container text-white font-weight-bold text-center w-50 p-3" role="alert"> 
-    <h2 class="alert-heading mb-0"> {{output3}} {{conflicts}}</h2> 
+    <h2 class="alert-heading mb-0"> {{output3}} </h2> 
+    <h2 class="alert-heading mb-0"> {{conflicts}} </h2> 
   </div>
 {% endif %}
 

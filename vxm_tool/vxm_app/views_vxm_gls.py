@@ -55,16 +55,16 @@ class GenotypeListStringApiView(generics.GenericAPIView):
             print(output)
             if len(output[2]) != 0:
 
-                VXM_out = "Virtual crossmatch is positive"
+                VXM_out = "Positive"
                 conflicts =  ", ".join(output[2])
                 probs = output[3]
 
-                return Response({"VICTOR_VXM": VXM_out, "Donor UNOS Antigen Equivalents": Donor_ags, "Donor Race": popSpecFul,"Candidate Unacceptable Antigens": Candidate_unacceptable_ags, 
+                return Response({"VICTOR VXM": VXM_out, "Donor UNOS Antigen Equivalents": Donor_ags, "Donor Race": popSpecFul,"Candidate Unacceptable Antigens": Candidate_unacceptable_ags, 
                     "Conflicting Antigens": conflicts, "Probabilities of virtual crossmatch": probs },  status=status.HTTP_200_OK)
 
             else: 
-                VXM_out = "Virtual crossmatch is negative"
-                return Response({"VICTOR_VXM": VXM_out, "Donor UNOS Antigen Equivalents": Donor_ags, "Donor Race": popSpecFul, "Candidate Unacceptable Antigens": Candidate_unacceptable_ags}, 
+                VXM_out = "Negative"
+                return Response({"VICTOR VXM": VXM_out, "Donor UNOS Antigen Equivalents": Donor_ags, "Donor Race": popSpecFul, "Candidate Unacceptable Antigens": Candidate_unacceptable_ags}, 
                  status=status.HTTP_200_OK)
 
 

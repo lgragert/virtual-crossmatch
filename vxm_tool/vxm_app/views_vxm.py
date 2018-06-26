@@ -136,8 +136,10 @@ def match_gl(request):
 
 	vxm_output = vxm_gls(donorTyping, popSpec, recepientAntigens)
 	print(vxm_output)
-	donor_ags = ', '.join(vxm_output[0])
+	donorAgs = sorted(vxm_output[0])
+	donor_ags = ', '.join(donorAgs)
 	#print(donor_ags)
+	
 	recepient_ags = ', '.join(vxm_output[1])
 	conflicted_ag = ', '.join(vxm_output[2])
 	ag_probabilities = vxm_output[3]
@@ -156,7 +158,7 @@ def match_gl(request):
 		cag_probs.append(k)
 	#print(cag_probs)
 
-	afterThcags = ", ".join(cags)
+	afterThcags = ", ".join(sorted(cags))
 	
 	if len(conflicted_ag) == 0:
 		end_result = "Virtual Crossmatch is Negative"
@@ -165,7 +167,7 @@ def match_gl(request):
 	#print(len(end_result))
 	return render(request, 'vxm_app/vxmGlsmatch.html', {'donor_ags': donor_ags, 
 		'recepient_ags': recepient_ags, 'output1': donorTyping, 'ethinicity': popSpecFul, 
-		'output3': end_result, "conflicts": afterThcags, "vxm_probs": ag_probabilities, 'zipped_list': zip(cags, cag_probs)})
+		'output3': end_result, "conflicts": afterThcags, 'zipped_list': zip(cags, cag_probs)})
 
 
 ###################################################################################################################################################################
@@ -190,7 +192,8 @@ def match_ac(request):
 
 	vxm_output = vxm_allele_codes(donorCodes, popSpec, recepientAntigens)
 	#print(vxm_output)
-	donor_ags = ', '.join(vxm_output[0])
+	donorAgs = sorted(vxm_output[0])
+	donor_ags = ', '.join(donorAgs)
 	#print(donor_ags)
 	recepient_ags = ', '.join(vxm_output[1])
 	conflicted_ag = ', '.join(vxm_output[2])
@@ -212,7 +215,7 @@ def match_ac(request):
 		cag_probs.append(k)
 	#print(cag_probs)
 
-	afterThcags = ", ".join(cags)
+	afterThcags = ", ".join(sorted(cags))
 	
 	if len(conflicted_ag) == 0:
 		end_result = "Virtual Crossmatch is Negative"
@@ -221,7 +224,7 @@ def match_ac(request):
 	#print(len(end_result))
 	return render(request, 'vxm_app/vxmMACmatch.html', {'donor_ags': donor_ags, 
 		'recepient_ags': recepient_ags, 'output1': donorTyping, 'ethinicity': popSpecFul, 
-		'output3': end_result, "conflicts": afterThcags, "vxm_probs": ag_probabilities, 'zipped_list': zip(cags, cag_probs)})
+		'output3': end_result, "conflicts": afterThcags,  'zipped_list': zip(cags, cag_probs)})
 
 
 #############################################################################################################################################################################	
