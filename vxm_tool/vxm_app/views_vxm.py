@@ -153,10 +153,10 @@ def match_gl(request):
 	#print(conflicted_ag)
 	cags = []
 	cag_probs = []
-	for i, k in new_ag_probs.items():
+	for i, k in sorted(new_ag_probs.items()):
 		cags.append(i)
 		cag_probs.append(k)
-	#print(cag_probs)
+	#print(new_ag_probs)
 
 	afterThcags = ", ".join(sorted(cags))
 	
@@ -210,7 +210,7 @@ def match_ac(request):
 	#print(new_ag_probs)
 	cags = []
 	cag_probs = []
-	for i, k in new_ag_probs.items():
+	for i, k in sorted(new_ag_probs.items()):
 		cags.append(i)
 		cag_probs.append(k)
 	#print(cag_probs)
