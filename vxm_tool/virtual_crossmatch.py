@@ -109,14 +109,14 @@ def vxm_gls(donor_gl_string, donor_ethnicity, recipient_UA_list):
 	##################################################################################################
 
 	for ag in ag_probs.keys():
-	if ag in UA_dict.keys():
-		p=0
-		for eqs in UA_dict[ag]:
-			if eqs in ag_probs.keys():
-				p += ag_probs[eqs]
-				ag_probs[ag] = p
-	else:
-		continue
+		if ag in UA_dict.keys():
+			p=0
+			for eqs in UA_dict[ag]:
+				if eqs in ag_probs.keys():
+					p += ag_probs[eqs]
+					ag_probs[ag] = p
+		else:
+			continue
 
 	#############################################################################################
 	##print(ag_probs)
@@ -191,14 +191,14 @@ def vxm_allele_codes(allele_codes_list, donor_ethnicity, recepient_UA_list):
 	#print(ag_probs)
 	
 	for ag in ag_probs.keys():
-	if ag in UA_dict.keys():
-		p=0
-		for eqs in UA_dict[ag]:
-			if eqs in ag_probs.keys():
-				p += ag_probs[eqs]
-				ag_probs[ag] = p
-	else:
-		continue
+		if ag in UA_dict.keys():
+			p=0
+			for eqs in UA_dict[ag]:
+				if eqs in ag_probs.keys():
+					p += ag_probs[eqs]
+					ag_probs[ag] = p
+		else:
+			continue
 	
 	donor_alleles = vxm_hla.allele_code_to_allele_list(allele_codes_list)
 	donor_allele_freqs = conversion_functions_for_VXM.allele_freq(donor_alleles, donor_ethnicity)
