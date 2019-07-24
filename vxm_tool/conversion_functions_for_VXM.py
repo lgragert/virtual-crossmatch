@@ -283,8 +283,12 @@ def genotype_ags(genotype_list, pop):
 
 		if allele_1 in population_allele_frequencies[pop]:
 			ag_freq_1 = population_allele_frequencies[pop][allele_1]
+		else:
+			ag_freq_1 = 0.0
 		if allele_2 in population_allele_frequencies[pop]:
 			ag_freq_2 = population_allele_frequencies[pop][allele_2]
+		else:
+			ag_freq_2 = 0.0
 
 		gf = 0
 		if (ag_1 == ag_2):
