@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <title>TransplantToolbox</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+   <nav class="navbar sticky-top navbar-expand-sm justify-content-center" style="background-color: #003399;">
+    <div class="nav" >
+        <a class="navbar-brand text-white h1" href="http://www.transplanttoolbox.org/"> TransplantToolbox  </a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+             <ul class="nav nav-fill nav-pills">
+                <li class="nav-item active">
+                   <a class=" text-center font-weight-bold nav-link text-white" href="{% url 'victor_home' %}"> Home </a> 
+                 </li>
+                 
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white font-weight-bold" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Current UNOS Match Run Logic </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item text-white font-weight-bold" style="background-color: #003399"; href="{% url 'unosags' %}"> UNOS Antigen Equivalents</a>
+                <div class="dropdown-divider text-danger"></div>
+                <a class="dropdown-item text-white font-weight-bold" style="background-color: #003399"; href="{% url 'highresallele' %}"> High Resolution Alleles</a> </div> </li>
+                 
+
+                 <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle font-weight-bold text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   Proposed Algorithm for Interpreting Ambiguous HLA Typing </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item text-white font-weight-bold" style="background-color: #003399"; href="{% url 'proposeduags' %}"> UNOS Antigen Equivalents</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-white font-weight-bold" style="background-color: #003399"; href="{% url 'glsvxm' %}"> Genotype List Strings </a> 
+                <div class="dropdown-divider"></div>
+              <a class="dropdown-item text-white font-weight-bold" style="background-color: #003399"; href="{% url 'macvxm' %}"> Multiple Allele Codes </a></div> </li>
+                 
+                
+                   <li class="nav-item active">
+                <a class="nav-link text-white font-weight-bold" href="{% url 'victor_services' %}"> Web Services </a>
+              
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link text-white font-weight-bold" href="{% url 'victor_license' %}"> License </a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link text-white font-weight-bold" href="http://www.transplanttoolbox.org/allan/"> ALLAN</a>
+                </li>
+    </ul>
+    </div>
+    </nav>      
+<body> 
+<div class="text-center  pt-1 pb-1 lead">
+    <h1 class="text-success jumbotron font-weight-bold">  VICTOR:  VIrtual CrossmaTch for mOleculaR typing data </h1> 
+   </div> 
+    <h2 class="container text-danger text-center font-weight-bold mt-5 mb-5"> Donor HLA Typing as UNOS Antigen Equivalents </h2>
+    <h3 class="container text-danger text-center font-weight-bold mt-5 mb-5"> Proposed Imputation Method  </h3>
+    
+<div> 
+    <p class="container jumbotron pt-4 pb-4 lead" > Enter Donor's HLA typing data as UNOS Antigen Equivalents in the text box, select the subject's race/ethnic category, and add Candidate's Unacceptable Antigens in the second text area and click on "SUBMIT" to run virtual cross match. The antigens in donor tyoing should be entered consecutively in pairs for each locus. For homozygous, enter the same antigen twice. For example, for locus A, antigen should be entered as A2 A24 or A2 A2, if homozygous.Typing and Unacceptable antigens for C locus should have a preceding zero (For example C07), if they range from 1 through 9 (C01 through C09).Population-specific HLA frequencies from NMDP are used to assign the most probable Alleles for donor HLA typing. HLA loci supported are A, B, C, DRB1, DQB1, DRB3/4/5. </p>
+    
+    <form class="container text-center text-primary mt-5" action="{% url 'proposedmatchuags' %}" method="get">
+       <textarea name = "userinput1" rows = "5" cols = "80" > A2 A33 B44 B65 C05 C08 DR1 DR13 DR52 DR52 DQ5 DQ6 </textarea> 
+        <br />
+      
+    <!--<h4 class=" text-danger mt-5"> Select Broad/Detailed Race </h4>-->
+    <h4 class=" text-danger font-weight-bold mt-5 mb-3"> Select Broad/Detailed Race </h4>
+    
+    <div class="form-group"> 
+    <div class="row"> 
+        <div class="col-sm text-success"> <h3>  </h3> 
+            <label class="text-danger text-uppercase font-weight-bold"> </label>
+                    <select class="form-control" id="userinput2" name="userinput2">
+                        <ul> <option disabled selected> -------Broad Races----------- </option> </ul>
+                        <ul>   <option name="AFA" value="AFA"> African Americans (AFA) </option> </ul>
+                        <ul>  <option name="userinput2" value="API"> Asia Pacific Islanders (API) </option> </ul>
+                        <ul>  <option name="userinput2" value="CAU"> Caucasians (CAU) </option> </ul>
+                        <ul>  <option name="userinput2" value="HIS"> Hispanics (HIS) </option> </ul>
+                        <ul>  <option name="userinput2" value="NAM"> Native Americans (NAM) </option> </ul>
+                        <ul> <option disabled> -------Detailed Races----------- </option> </ul>
+                        <ul>  <option name="userinput2" value="AAFA"> African Americans (AAFA) </option> </ul>
+                        <ul>  <option name="userinput2" value="AFB"> African Black (AFB) </option> </ul>
+                        <ul>  <option name="userinput2" value="AINDI"> South Asian Indian (AINDI) </option> </ul>
+                        <ul>  <option name="userinput2" value="AISC"> American India-South or Central American (AISC) </option> </ul>
+
+                        <ul>  <option name="userinput2" value="ALANAM"> Alaska Native (ALANAM) </option> </ul>
+                        <ul>  <option name="userinput2" value="AMIND"> North American Indian (AMIND) </option> </ul>
+                        <ul>  <option name="userinput2" value="CARB"> Caribbean Black (CARB) </option> </ul>
+                        <ul>  <option name="userinput2" value="CARHIS"> Caribbean Hispanic (CARHIS) </option> </ul>
+
+                        <ul>  <option name="userinput2" value="CARIBI"> Caribbean Indian (CARIBI) </option> </ul>
+                        <ul>  <option name="userinput2" value="EURCAU"> European Caucasian (EURCAU) </option> </ul>
+                        <ul>  <option name="userinput2" value="FILII"> Filipino (FILII) </option> </ul>
+                        <ul>  <option name="userinput2" value="HAWI"> Hawaiian or Pacific Islander (HAWI)</option> </ul>
+
+                        <ul>  <option name="userinput2" value="JAPI"> Japanese (JAPI) </option> </ul>
+                        <ul>  <option name="userinput2" value="KORI"> Korean (KORI) </option> </ul>
+                        <ul>  <option name="userinput2" value="MENAFC"> Middle Eastern or N. Coast of Africa (MENAFC) </option> </ul>
+                        <ul>  <option name="userinput2" value="MSWHIS"> Mexican or Chicano (MSWHIS) </option> </ul>
+
+                        <ul>  <option name="userinput2" value="NCHI"> Chinese (NCHI) </option> </ul>
+                        <ul>  <option name="userinput2" value="SCAHIS"> South or Central American Hispanic (SCAHIS) </option> </ul>
+                        <ul>  <option name="userinput2" value="SCAMB"> South or Central American (SCAMB) </option> </ul>
+                        <ul>  <option name="userinput2" value="SCSEAI"> South East Asian (SCSEAI) </option> </ul>
+                        <ul>  <option name="userinput2" value="VIET"> Vietnamese (VIET) </option> </ul>
+
+
+
+
+
+                </select>
+         </div> 
+     </div>   
+     <h4 class="text-danger font-weight-bold mb-3 mt-5"> Candidate's Unacceptable Antigens </h4>
+     <div> <textarea name = "userinput3" rows = "3" cols = "80" > B7 B13 B27 B41 B47 B48 B50 B51 B52 B60 B61 B62 B71 B73 B75 B77 B81 DR4 DR8 DR11 DR15 DR16 DQ2 DQ4 DQ7 DQ8 DQ9 A*11:02 A*66:02 DRB3*02:02 DRB1*13:03 </textarea>   </div> 
+    
+     <h4 class="text-danger font-weight-bold mt-5 mb-3"> Probability Threshold </h4>
+    <div class="jumbotron pb-2 pt-3">  <h5 class= "container text-secondary active text-center lead"> In case of donor's ambiguous HLA typing there is a probability of positive virtual crossmatch for every unacceptable antigen. Users can indicate the probability threshold of their choice in the text area below. Default value is 0.1 and range is 0 through 1. For a  value "X" entered by the user all the unacceptable antigens that have probability of positive virtual crossmatch lower than "X" will be excluded by VICTOR </h5>  </div>
+
+
+  <textarea name = "userinput4" rows = "1" cols = "10" >0.1</textarea>       
+  
+ <br>
+  <input class="btn btn-danger btn-lg active mt-5" type="submit" value="SUBMIT"/> </div> 
+    </form>
+    <br>
+    <br>
+    <br>
+    
+</div>
+<div class="jumbotron text-white mt-5 pt-2 pb-2" style="background-color: #003399;"> 
+<h3 class="container text-center font-italic" > Contact Us </h3>
+     <h5 class="container text-center font-italic"> For scientific and technical queries contact pathologygragertlab@tulane.edu.  </h5>
+     <br>
+<h4 class="container text-center font-italic"> Cite VICTOR Tool</h4>
+    <p class= "container text-center font-italic"> Manuscript under preparation </p>
+    
+     <p class="container text-center font-weight-bold"> Prototype Tool for Research Use Only </p>
+</div>     
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"  crossorigin="anonymous"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
+
+</body>
+</html>
+
+

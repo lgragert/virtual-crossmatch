@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    
+    <title>TransplantToolbox</title>
+    <!-- <link rel="stylesheet" href="{% static "css/home.css" %}"/>  -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+
+<nav class="navbar sticky-top navbar-expand-sm justify-content-center" style="background-color: #003399;">
+    <div class="nav" >
+        <a class="navbar-brand text-white h1" href="http://www.transplanttoolbox.org/"> TransplantToolbox  </a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+             <ul class="nav nav-fill nav-pills">
+                <li class="nav-item active">
+                   <a class=" text-center font-weight-bold nav-link text-white" href="{% url 'victor_home' %}"> Home </a> 
+                 </li>
+                 
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white font-weight-bold" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Current UNOS Match Run Logic </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item text-white font-weight-bold" style="background-color: #003399"; href="{% url 'unosags' %}"> UNOS Antigen Equivalents</a>
+                <div class="dropdown-divider text-danger"></div>
+                <a class="dropdown-item text-white font-weight-bold" style="background-color: #003399"; href="{% url 'highresallele' %}"> High Resolution Alleles</a> </div> </li>
+                 
+
+                 <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle font-weight-bold text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   Proposed Algorithm for Interpreting Ambiguous HLA Typing </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item text-white font-weight-bold" style="background-color: #003399"; href="{% url 'proposeduags' %}"> UNOS Antigen Equivalents</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-white font-weight-bold" style="background-color: #003399"; href="{% url 'glsvxm' %}"> Genotype List Strings </a> 
+                <div class="dropdown-divider"></div>
+              <a class="dropdown-item text-white font-weight-bold" style="background-color: #003399"; href="{% url 'macvxm' %}"> Multiple Allele Codes </a></div> </li>
+                 
+                
+                   <li class="nav-item active">
+                <a class="nav-link text-white font-weight-bold" href="{% url 'victor_services' %}"> Web Services </a>
+              
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link text-white font-weight-bold" href="{% url 'victor_license' %}"> License </a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link text-white font-weight-bold" href="http://www.transplanttoolbox.org/allan/"> ALLAN</a>
+                </li>
+    </ul>
+    </div>
+    </nav>            
+
+	
+  <br>
+<body>
+  <div class=" jumbotron text-center">
+    <h1 class="text-danger font-weight-bold">  VICTOR:  VIrtual CrossmaTch for mOleculaR typing data </h1> 
+   </div> 
+   
+  
+  
+    <h4 class="text-dark container jumbotron pt-4 pb-4 mt-4"> This prototype tool computes virtual crossmatch using the candidate’s unacceptable antigens including high resolution alleles and molecular HLA typing of the donor. </h4>
+  </div>
+  
+  
+
+    
+  <div class="container pb-4 mb-5" style="border:1px solid #255"> 
+    <div class="alert alert-dark alert-dismissible fade show" role="alert">
+            <strong>IPD-IMGT/HLA release 3.37.0 </strong> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button> </div> 
+    <h3 class="container font-weight-bold text-center mt-4 mb-5" > Virtual Crossmatch Algorithm and Donor HLA Typing Input Format (choose one:) </h3>
+    <div class="container"> 
+    <div>
+        <div class="card bg-light"> 
+            <div class="text-center card-body">
+                <h5 class="card-title font-weight-bold text-center">Current UNOS Match Run Logic </h5> 
+                 <div class="btn-group text-center"> 
+                    <div> <a class="btn btn-danger font-weight-bold text-white  btn-lg" href="{% url 'unosags' %}" role="button" > UNOS Antigen Equivalents</a> </div> 
+                    <div> <a  class="btn btn-danger font-weight-bold text-white btn-lg" href="{% url 'highresallele' %}" role="button" > High Resolution Alleles</a> </div> </div></div>     </div></div>
+                  <br> 
+          <div class="card"> 
+            <div class="card-body bg-light text-center">
+            <h5 class="card-title font-weight-bold text-center">Proposed Algorithm for Interpreting Ambiguous HLA Typing</h5> 
+
+            <div class="btn-group"> 
+              <div> <a  class="btn btn-success text-white font-weight-bold  btn-lg" href="{% url 'proposeduags' %}" role="button" > UNOS Antigen Equivalents </a> </div> 
+                  <div> <a  class="btn btn-success text-white font-weight-bold  btn-lg" href="{% url 'glsvxm' %}" role="button" > Genotype List Strings</a> </div> 
+
+                  <div> <a  class="btn btn-success text-white  font-weight-bold btn-lg" href="{% url 'macvxm' %}" role="button" > NMDP Multiple Allele Codes </a> </div> </div> 
+  </div> </div>
+
+
+
+
+
+
+
+
+      
+  </div>
+   </div>
+   <br>
+
+<div class="container bg-alert-dark jumbotron">
+  
+  <div class="col-sm text-center"> <h3> Downloads & External Links </h3> 
+    <br>
+      <ul>
+        <a class="col-sm btn w-75 btn-outline-danger  btn-md font-weight-bold" href="{% static "images/VICTOR_users_guide.pdf" %}" > VICTOR User's Guide </a> 
+      </ul>
+      <ul>
+        <a class="col-sm btn w-75 btn-outline-danger  btn-md font-weight-bold" href="https://optn.transplant.hrsa.gov/media/1200/optn_policies.pdf" > OPTN Policy Document </a> 
+      </ul>
+      
+      <ul>
+        <a class="col-md btn w-75 btn-outline-danger  btn-md font-weight-bold" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3715123/" > Genotype List String format information</a> 
+      </ul>
+
+      <ul>
+        <a class="col-sm btn w-75 btn-outline-danger  btn-md font-weight-bold" href="https://hml.nmdp.org/MacUI/" > NMDP Multiple Allele Code (MAC) Web Service </a> 
+      </ul>
+      
+      <ul>
+        <a class="col-sm btn w-75 btn-outline-danger  btn-md font-weight-bold" href="http://frequency.nmdp.org/" > NMDP High Resolution HLA Frequency Data </a> 
+      </ul>
+
+      <ul>
+        <a class="col-sm btn w-75 btn-outline-danger  btn-md font-weight-bold" href="https://www.ebi.ac.uk/ipd/imgt/hla/" > IPD-IMGT/HLA Allele Database</a> 
+      </ul>
+
+      <ul>
+        <a class="col-sm btn w-75 btn-outline-danger  btn-md font-weight-bold" href="https://github.com/lgragert/virtual-crossmatch" > GitHub Repository for Source Code </a> 
+      </ul>
+    </div>
+</div>
+  
+
+<div class="jumbotron text-white mt-5 pt-2 pb-2" style="background-color: #003399;"> 
+<h3 class="container text-center font-italic" > Contact Us </h3>
+    <h5 class="container text-center font-italic"> For scientific and technical queries contact pathologygragertlab@tulane.edu.  </h5>
+    <br>
+     
+<h5 class="container text-center font-italic"> Cite VICTOR Tool</h5>
+    <p class= "container text-center font-italic"> Manuscript under preparation </p>
+    
+     <h5 class="container text-center font-weight-bold"> Prototype Tool for Research Use Only </h5>
+</div>
+     <!--<div style="margin-left:50px;"></div> -->
+     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>    
+</body>    
+</html>

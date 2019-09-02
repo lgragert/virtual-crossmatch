@@ -4,7 +4,8 @@ import re
 import requests
 import operator
 
-
+import reverse_conversion 
+from  reverse_conversion import map_single_ag_to_alleles, map_ag_for_proposed_algo
 
 
 def allele_truncate(allele):
@@ -63,24 +64,25 @@ def expand_ac(allele_code):
 
 
 def single_locus_allele_codes_genotype(allele_code_pair_list):
-    genotype_list = []
-    MAC_1 = allele_code_pair_list[0]
-    MAC_2 = allele_code_pair_list[1]
+	genotype_list = []
+	MAC_1 = allele_code_pair_list[0]
+	MAC_2 = allele_code_pair_list[1]
 
-    MAC_1_locus = MAC_1.split("*")[0]
-    MAC_2_locus = MAC_2.split("*")[0]
+	MAC_1_locus = MAC_1.split("*")[0]
+	MAC_2_locus = MAC_2.split("*")[0]
 
-    if MAC_1_locus == MAC_2_locus:
-        MAC_1_expanded = expand_ac(MAC_1)
-        MAC_1_expanded_split = MAC_1_expanded.split("/")
-        MAC_2_expanded = expand_ac(MAC_2)
-        MAC_2_expanded_split = MAC_2_expanded.split("/")
+    
+	MAC_1_expanded = expand_ac(MAC_1)
+	MAC_1_expanded_split = MAC_1_expanded.split("/")
+	MAC_2_expanded = expand_ac(MAC_2)
+	MAC_2_expanded_split = MAC_2_expanded.split("/")
         
-        for i in MAC_1_expanded_split:
-            for j in MAC_2_expanded_split:
-                genotype = i + "+" + j
-                genotype_list.append(genotype)
-        return genotype_list
+	for i in MAC_1_expanded_split:
+		for j in MAC_2_expanded_split:
+			genotype = i + "+" + j
+			genotype_list.append(genotype)
+	
+	return genotype_list
 
 
 def allele_code_to_allele_list(allele_code_list):
@@ -94,4 +96,42 @@ def allele_code_to_allele_list(allele_code_list):
 	return flat_list
 
 
+def genotype_allele_ag_freq(genotype_frequency):
+	ag_probs = {}
+	for i in genotype_frequency:
+		ag_list = i[0].split("+")
+		for j in ag_list:
+			if j in ag_probs.keys():
+				ag_probs[j] += i[1]
+			else:
+				ag_probs[j] = i[1]
 	
+	return ag_probs
+
+
+def ags_to_strings(ag1, ag2):
+	allele_list1 = map_ag_for_proposed_algo(ag1)
+	#print(len(allele_list1))
+	allele_string1 = "/".join(allele_list1)
+	allele_list2 = map_ag_for_proposed_algo(ag2)
+	#print(len(allele_list2))
+	allele_string2 = "/".join(allele_list2)
+
+	genotype_list = allele_string1 + "+" + allele_string2
+	return genotype_list
+
+
+def merge_ql_expression_alleles(allele_prob_dict):
+	new_dict = {}
+
+
+	for i,j in allele_prob_dict.items():
+		if i.endswith("L") or i.endswith("Q"):
+			if i[:-1] in allele_prob_dict:
+				new_dict[i[:-1]] += j
+			else:
+				new_dict[i] = j
+		else:
+			new_dict[i] = j		
+
+	return new_dict		

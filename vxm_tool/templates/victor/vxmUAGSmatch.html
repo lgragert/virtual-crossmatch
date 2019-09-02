@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
+        <title>TransplantToolbox</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+     
+    </head>
+<nav class="navbar sticky-top navbar-expand-sm justify-content-center" style="background-color: #003399;">
+    <div class="nav" >
+        <a class="navbar-brand text-white h1" href="http://www.transplanttoolbox.org/"> TransplantToolbox  </a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+             <ul class="nav nav-fill nav-pills">
+                <li class="nav-item active">
+                   <a class=" text-center font-weight-bold nav-link text-white" href="{% url 'victor_home' %}"> Home </a> 
+                 </li>
+                 
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white font-weight-bold" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Current UNOS Match Run Logic </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item text-white font-weight-bold" style="background-color: #003399"; href="{% url 'unosags' %}"> UNOS Antigen Equivalents</a>
+                <div class="dropdown-divider text-danger"></div>
+                <a class="dropdown-item text-white font-weight-bold" style="background-color: #003399"; href="{% url 'highresallele' %}"> High Resolution Alleles</a> </div> </li>
+                 
+
+                 <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle font-weight-bold text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   Proposed Algorithm for Interpreting Ambiguous HLA Typing </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item text-white font-weight-bold" style="background-color: #003399"; href="{% url 'proposeduags' %}"> UNOS Antigen Equivalents</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-white font-weight-bold" style="background-color: #003399"; href="{% url 'glsvxm' %}"> Genotype List Strings </a> 
+                <div class="dropdown-divider"></div>
+              <a class="dropdown-item text-white font-weight-bold" style="background-color: #003399"; href="{% url 'macvxm' %}"> Multiple Allele Codes </a></div> </li>
+                 
+                
+                   <li class="nav-item active">
+                <a class="nav-link text-white font-weight-bold" href="{% url 'victor_services' %}"> Web Services </a>
+              
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link text-white font-weight-bold" href="{% url 'victor_license' %}"> License </a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link text-white font-weight-bold" href="http://www.transplanttoolbox.org/allan/"> ALLAN</a>
+                </li>
+    </ul>
+    </div>
+    </nav>                    
+
+    
+
+<body>
+
+ 
+<div class=" jumbotron text-center  lead">
+    <h1 class="text-dark font-weight-bold"> Virtual Crossmatch results using VICTOR algorithm </h1>
+    <br>
+     <h3 class="text-dark font-weight-bold"> Donor Typing as UNOS Antigen Equivalents </h3>
+</div>
+<br>
+
+<br>
+<br>
+<br>
+
+ 
+
+  <div class="container">
+
+    <table class="container table table-responsive-sm table-bordered table-hover table-striped  text-xl-left"> 
+            <thead class="thead-dark">
+                <tr> 
+                    <th scope="col"> <h4> Locus </h4></th>
+                    <th scope="col"> <h5> Donor's Typing </h5> </th>
+                    <th scope="col"> <h5> Donor Specific Antibodies </h5></th>
+                    <th scope="col"> <h5> OPTN Equivalents for Unacceptable Antigens </h5></th>
+                    <th scope="col"> <h5> Candidate's Unacceptable Antigens </h5> </th>
+                    
+                    
+                    
+                    
+                    
+
+
+                </tr>
+            </thead>    
+    <tbody>
+      {% for loci, ag, uag, optne, cag in zipped_list %}
+       <tr class="bg-light">
+      <td> {{loci}} </td>
+      <td> {{ag}} </td>
+      {% if cag %}
+    <div > 
+      <td class="font-weight-bold text-white", style="background-color: #e60000;"> {{cag}} </td> </div>
+
+{% else %}
+
+  <div >  
+    <td class="font-weight-bold", style="background-color: #39e600"> {{cag}} </td> </div>      
+{% endif %}
+      <td> {{optne}} </td>
+      <td> {{uag}} </td>
+      
+</tr>
+            {% endfor %}
+            </tbody>
+        </table>    
+
+
+    </tbody>
+  </div>
+ <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+{% if conflicted_ag %}
+  <div class=" container text-white font-weight-bold text-center w-50 p-3" role="alert", style="background-color: #e60000;"> 
+    <h2 class="alert-heading mb-0">  {{output3}} </h2> 
+    <br>
+    <h2 class="alert-heading mb-0"> Donor Specific Antibodies:  {{conflicted_ag}} </h2> 
+  </div>
+ {% else %}
+  <div class="container text-white font-weight-bold text-center w-50 p-3" role="alert" , style="background-color: #39e600;"> 
+    <h2 class="alert-heading mb-0">  {{output3}} </h2>
+    <h2 class="alert-heading mb-0"> {{conflicted_ag}} </h2> 
+  </div>
+  {% endif %}
+
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+<div class="jumbotron text-white mt-5 pt-2 pb-2" style="background-color: #003399;"> 
+<h3 class="container text-center font-italic" > Contact Us </h3>
+     <h5 class="container text-center font-italic"> For scientific and technical queries contact pathologygragertlab@tulane.edu.  </h5>
+     <br>
+     
+<h4 class="container text-center font-italic"> Cite VICTOR Tool</h4>
+    <p class= "container text-center font-italic"> Manuscript under preparation </p>
+   
+     <p class="container text-center font-weight-bold"> Prototype Tool for Research Use Only </p>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>

@@ -3,8 +3,8 @@
 import os
 import re
 import requests   
-import vxm_hla
-from vxm_hla import allele_truncate
+import hla
+from hla import allele_truncate
 
 ag_to_allele_dict = {}
 UA_eq_dict = {}
@@ -34,20 +34,20 @@ for row in UNOS_conversion_table_file:
 		continue 
 	else:
 		allele = row.split(',')[0]
-		allele_4d = vxm_hla.allele_truncate(allele)
+		#allele_4d = hla.allele_truncate(allele)
 		antigen = row.split(',')[1]
 		rule = row.split(',') [2]
 		bw4_6 = row.split(',')[3]
 		
 		if antigen in ag_to_allele_dict.keys():
-			if allele_4d in ag_to_allele_dict[antigen]:
-				continue
-			else:	
+			#if allele_4d in ag_to_allele_dict[antigen]:
+				#continue
+			#else:	
 
-				ag_to_allele_dict[antigen].append(allele_4d)
+			ag_to_allele_dict[antigen].append(allele)
 
 		else:
-			ag_to_allele_dict[antigen] = [allele_4d]	 
+			ag_to_allele_dict[antigen] = [allele]	 
 
 
 #print(ag_to_allele_dict)
@@ -81,14 +81,28 @@ for ag in ag_to_allele_dict.keys():
 #print(final_dict)
 
 def map_single_ag_to_alleles(antigen):
-	allele_list = {}
-	allele_only_list = []
 	if antigen in final_dict:
 		allele_list = final_dict[antigen]
-	
-	for i in allele_list.values():
-		allele_only_list.append(i)
 
-	flat_list = [item for sublist in allele_only_list for item in sublist]	
-	flat_list = [item for sublist in flat_list for item in sublist]
-	return flat_list
+	else: 
+		allele_list = {antigen: []}	
+
+	return allele_list 	
+
+
+
+def map_ag_for_proposed_algo(antigen):
+	alleles = ag_to_allele_dict[antigen]
+	set_alleles = []
+
+	for allele in alleles:
+		new_allele = allele_truncate(allele)
+		set_alleles.append(new_allele)
+
+	alleles_mapped =list(set(set_alleles))
+	return alleles_mapped
+
+
+
+
+

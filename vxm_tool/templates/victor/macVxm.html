@@ -10,54 +10,65 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
-    <nav class="navbar sticky-top navbar-expand-sm justify-content-center" style="background-color: #003399;">
+   <nav class="navbar sticky-top navbar-expand-sm justify-content-center" style="background-color: #003399;">
     <div class="nav" >
-        <a class="navbar-brand text-white h1" href="{% url 'victor_home' %}"> TransplantToolbox  </a>
+        <a class="navbar-brand text-white h1" href="http://www.transplanttoolbox.org/"> TransplantToolbox  </a>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
           <div class="collapse navbar-collapse" id="navbarNav">
              <ul class="nav nav-fill nav-pills">
                 <li class="nav-item active">
-                   <a class=" text-center nav-link text-white h5" href="{% url 'victor_home' %}"> Home </a> 
+                   <a class=" text-center font-weight-bold nav-link text-white" href="{% url 'victor_home' %}"> Home </a> 
                  </li>
-                 <li class="nav-item active">
-                  <a class="nav-link text-white h5" href="{% url 'unosags' %}"> UNOS Antigen Equivalents</a>
-                </li>
-                 <li class="nav-item active">
-                  <a class="nav-link text-white h5" href="{% url 'highresallele' %}"> High Resolution Alleles </a>
+                 
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white font-weight-bold" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Current UNOS Match Run Logic </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item text-white font-weight-bold" style="background-color: #003399"; href="{% url 'unosags' %}"> UNOS Antigen Equivalents</a>
+                <div class="dropdown-divider text-danger"></div>
+                <a class="dropdown-item text-white font-weight-bold" style="background-color: #003399"; href="{% url 'highresallele' %}"> High Resolution Alleles</a> </div> </li>
+                 
+
+                 <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle font-weight-bold text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   Proposed Algorithm for Interpreting Ambiguous HLA Typing </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item text-white font-weight-bold" style="background-color: #003399"; href="{% url 'proposeduags' %}"> UNOS Antigen Equivalents</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-white font-weight-bold" style="background-color: #003399"; href="{% url 'glsvxm' %}"> Genotype List Strings </a> 
+                <div class="dropdown-divider"></div>
+              <a class="dropdown-item text-white font-weight-bold" style="background-color: #003399"; href="{% url 'macvxm' %}"> Multiple Allele Codes </a></div> </li>
+                 
+                
+                   <li class="nav-item active">
+                <a class="nav-link text-white font-weight-bold" href="{% url 'victor_services' %}"> Web Services </a>
+              
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link text-white h5" href="{% url 'glsvxm' %}"> Genotype List Strings</a>
+                  <a class="nav-link text-white font-weight-bold" href="{% url 'victor_license' %}"> License </a>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link text-white h5" href="{% url 'macvxm' %}"> Multiple Allele Codes </a>
-                </li>
-                <li class="nav-item active">
-                <a class="nav-link text-white h5" href="http://www.transplanttoolbox.org/tool_services"> Web Services </a>
-              </li>
-                <li class="nav-item active">
-                  <a class="nav-link text-white h5" href="{% url 'victor_license' %}"> License </a>
-                </li>
-                <li class="nav-item active">
-                  <a class="nav-link text-white h5" href="http://www.transplanttoolbox.org/"> ALLAN</a>
+                  <a class="nav-link text-white font-weight-bold" href="http://www.transplanttoolbox.org/allan/"> ALLAN</a>
                 </li>
     </ul>
     </div>
-    </nav> 
+    </nav>      
 <body> 
-<div class=" text-center  pt-1 pb-1 lead">
+<div class="text-center  pt-1 pb-1 lead">
     <h1 class="text-success jumbotron font-weight-bold">  VICTOR:  VIrtual CrossmaTch for mOleculaR typing data </h1> 
    </div> 
-    <h2 class="container text-danger text-center font-weight-bold mt-5 mb-5"> Donor HLA Typing as Genotype List String </h2>
+    <h2 class="container text-danger text-center font-weight-bold mt-5 mb-5"> Donor HLA Typing as NMDP Multiple Allele Codes </h2>
     
 <div> 
-    <p class="container jumbotron pt-4 pb-4 lead" > Enter Donor's HLA typing data as Genotype List (GL) String of IMGT/HLA alleles in the text box, select the subject's race/ethnic category, and add Recepient's Unacceptable Antigens in the second text area and click on "SUBMIT" to run virtual cross match. Alleles in the GL string should be resolved to specific HLA protein field (2nd field) or fully resolved (full IMGT/HLA allele name). Protein expression specifying characters ("L", "N", "S", "Q") can be used. Characters that specify antigen recognition domain equivalents (“G”, “P”, “g") can also be used. Population-specific HLA frequencies from NMDP are used to assign the most probable UNOS antigen equivalents for donor HLA typing. HLA loci supported are A, B, C, DRB1, DQB1, DRB3/4/5. </p>
+    <p class="container jumbotron pt-4 pb-4 lead" > Enter Donor's HLA typing data as NMDP Multiple Allele Codes (MAC) in the text box, select the subject's race/ethnic category, and add Candidate's Unacceptable Antigens in the second text area and click on "SUBMIT" to run virtual cross match. The allele codes should be entered consecutively in pairs for each locus. For homozygous, enter the same allele code twice. For example, for locus A, allele codes should be entered as A*02:AJEXK A*24:AJFBM or A*02:AJEXK A*02:AJEXK. Unacceptable antigens for C locus should have a preceding zero (For example C07), if they range from 1 through 9 (C01 through C09).
+    Population-specific HLA frequencies from NMDP are used to assign the most probable UNOS antigen equivalents for donor HLA typing. HLA loci supported are A, B, C, DRB1, DQB1, DRB3/4/5. </p>
     
-    <form class="container text-center text-primary mt-5" action="{% url 'matchgls' %}" method="get">
-       <textarea name = "userinput1" rows = "5" cols = "80" >A*02:01g+A*26:01g|A*02:55+A*26:07^C*05:01g+C*01:02g^B*15:01/B*15:02/B*15:03/B*15:04+B*27:05g^DRB1*12:01g+DRB1*01:01^DQB1*03:01g+DQB1*05:01</textarea> 
+    <form class="container text-center text-primary mt-5" action="{% url 'matchmac' %}" method="get">
+       <textarea name = "userinput1" rows = "5" cols = "80" > A*02:AJEXK A*24:AJFBM B*15:HVT B*39:XX C*01:AJPVU C*07:AJPWP DRB1*04:ANEFE DRB1*16:ANXFE DRB4*01:EHN DRB5*02:BF DQB1*03:AJGCP DQB1*03:AJDZS  </textarea> 
         <br />
       
     <!--<h4 class=" text-danger mt-5"> Select Broad/Detailed Race </h4>-->
-    <h4 class="text-danger font-weight-bold mt-5 mb-3"> Select Broad/Detailed Race </h4>
+    <h4 class=" text-danger font-weight-bold mt-5 mb-3"> Select Broad/Detailed Race </h4>
     
     <div class="form-group"> 
     <div class="row"> 
@@ -104,18 +115,17 @@
                 </select>
          </div> 
      </div>   
-     <h4 class=" text-danger font-weight-bold mt-5 mb-3"> Candidate's Unacceptable Antigens </h4>
-     <div> <textarea name = "userinput3" rows = "2" cols = "80" >A2 Bw4 A*02:01 </textarea>   </div>       
-   
-  <h4 class="text-danger font-weight-bold mt-5 mb-3"> Probability Threshold </h4> 
-  <div class="jumbotron pb-2 pt-3">  <h5 class= "container text-secondary active text-center lead"> In case of donor's ambiguous HLA typing there is a probability of positive virtual crossmatch for every unacceptable antigen. Users can indicate the probability threshold of their choice in the text area below. Default value is 0.1 and range is 0 through 1. For a value "X" entered by the user all the unacceptable antigens that have probability of positive virtual crossmatch lower than "X" will be excluded by VICTOR. </h5>  </div>
-  <textarea name = "userinput4" rows = "1" cols = "10" > 0.1 </textarea> 
-        <br />
-
-
-
-  <input class="btn btn-danger btn-lg active mt-5" type="submit" value="SUBMIT"/> </div> 
+     <h4 class=" text-danger font-weight-bold mb-3 mt-5"> Candidate's Unacceptable Antigens </h4>
+     <div> <textarea name = "userinput3" rows = "1" cols = "80" > A1 A23 A29 A36 A80 B8 B76 DR7 DR17 DR52 A*24:02 B*44:03 </textarea>   </div> 
     
+     <h4 class="text-danger font-weight-bold mt-5 mb-3"> Probability Threshold </h4>
+    <div class="jumbotron pb-2 pt-3">  <h5 class= "container text-secondary active text-center lead"> In case of donor's ambiguous HLA typing there is a probability of positive virtual crossmatch for every unacceptable antigen. Users can indicate the probability threshold of their choice in the text area below. Default value is 0.1 and range is 0 through 1. For a  value "X" entered by the user all the unacceptable antigens that have probability of positive virtual crossmatch lower than "X" will be excluded by VICTOR </h5>  </div>
+
+
+  <textarea name = "userinput4" rows = "1" cols = "10" >0.1</textarea>       
+  
+ <br>
+  <input class="btn btn-danger btn-lg active mt-5" type="submit" value="SUBMIT"/> </div> 
     </form>
     <br>
     <br>
@@ -124,8 +134,11 @@
 </div>
 <div class="jumbotron text-white mt-5 pt-2 pb-2" style="background-color: #003399;"> 
 <h3 class="container text-center font-italic" > Contact Us </h3>
-    <p class="container text-center font-italic"> For scientific and technical queries contact pathologygragertlab@tulane.edu.  </p>
+     <h5 class="container text-center font-italic"> For scientific and technical queries contact pathologygragertlab@tulane.edu.  </h5>
      <br>
+<h4 class="container text-center font-italic"> Cite VICTOR Tool</h4>
+    <p class= "container text-center font-italic"> Manuscript under preparation </p>
+    
      <p class="container text-center font-weight-bold"> Prototype Tool for Research Use Only </p>
 </div>     
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"  crossorigin="anonymous"></script>
@@ -134,3 +147,14 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+    
+ 
