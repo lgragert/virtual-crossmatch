@@ -15,7 +15,7 @@ from . import serializers
 
 import virtual_crossmatch
 
-from virtual_crossmatch import vxm_allele_codes
+from virtual_crossmatch import vxm_proposed_for_uags
 
 
 pop_acro_dict = {"AFA": "African American", "API": "Asia/Pacific Islander", "CAU": "Caucasian", "HIS": "Hispanic", 
@@ -29,39 +29,45 @@ pop_acro_dict = {"AFA": "African American", "API": "Asia/Pacific Islander", "CAU
 
 
 
-class MultipleAlleleCodesApiView(generics.GenericAPIView):
-    serializer_class = serializers.VICTOR_MACSerializer
+
+class PUNOSAgsApiView(generics.GenericAPIView):
+    serializer_class = serializers.VICTOR_Prop_UNOSSerializer
 
     def post(self, request, format=None):
-        """Returns UNOS antigen for an allele."""
+        """Computes VXM for UNOS Ags with proposed algorithm"""
         """parameters: 
         allele:string
         """
-        serializer = serializers.VICTOR_MACSerializer(data=request.data)    
+        serializer = serializers.VICTOR_Prop_UNOSSerializer(data=request.data)    
 
         if serializer.is_valid(raise_exception=True):
             
             #serializer.create(allele)
             #allele = serializer.save()
             #serializer.create()
-            donor_macs = serializer.data.get('Donor_Allele_Codes')
-            donor_macs_list_split = donor_macs.split(" ")
+            unos_ags_list = serializer.data.get('Donor_UNOS_Antigen_equivalents')
             pop = serializer.data.get('Donor_ethinicity')
-            ua_list = serializer.data.get('Candidate_Unacceptable_antigens')
-            ua_list_split = ua_list.split(" ")
-            output = virtual_crossmatch.vxm_allele_codes(donor_macs_list_split, pop, ua_list_split)
             popSpecFul = pop_acro_dict[pop]
+            ua_list = serializer.data.get('Candidate_Unacceptable_antigens')
+            unos_ag_split = unos_ags_list.split(" ")
+            #print(unos_ag_split)
+            ua_list_split = ua_list.split(" ")
+            #print(ua_list_split)
+            ###output_rendered = donor_ags, recepient_ags, conflicts, conflict_ag_probs, donor_allele_freqs, ag_probs, bw_prob
+            
+
+            output = virtual_crossmatch.vxm_proposed_for_uags(unos_ag_split, pop, ua_list_split)
             Donor_ags = ", ".join(output[0])
             Candidate_unacceptable_ags = ", ".join(output[1])
-            print(output)
+            #print(len(output))
             if len(output[2]) != 0:
 
                 VXM_out = "Positive"
                 conflicts =  ", ".join(output[2])
                 probs = output[3]
 
-                return Response({"VICTOR VXM": VXM_out, "Donor UNOS Antigen Equivalents": Donor_ags, "Donor Race": popSpecFul,"Candidate Unacceptable Antigens": Candidate_unacceptable_ags, 
-                    "Conflicting Antigens": conflicts, "Probabilities of virtual crossmatch": probs },  status=status.HTTP_200_OK)
+                return Response({"VICTOR VXM": VXM_out, "Donor UNOS Antigen Equivalents": Donor_ags, "Donor Race": popSpecFul, "Candidate Unacceptable Antigens": Candidate_unacceptable_ags, "Probabilities of virtual crossmatch": probs,
+                 "Conflicting Antigens": conflicts, },  status=status.HTTP_200_OK)
 
             else: 
                 VXM_out = "Negative"

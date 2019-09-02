@@ -33,7 +33,7 @@ class MultipleAlleleCodesApiView(generics.GenericAPIView):
     serializer_class = serializers.VICTOR_MACSerializer
 
     def post(self, request, format=None):
-        """Returns UNOS antigen for an allele."""
+        """Computes VXM for donor typing available as NMDP Multiple Allele Codes."""
         """parameters: 
         allele:string
         """

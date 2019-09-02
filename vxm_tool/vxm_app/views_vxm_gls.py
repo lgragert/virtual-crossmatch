@@ -33,7 +33,7 @@ class GenotypeListStringApiView(generics.GenericAPIView):
     serializer_class = serializers.VICTOR_GLstringSerializer
 
     def post(self, request, format=None):
-        """Returns UNOS antigen for an allele."""
+        """Computes VXM for donor typing available as genotype list strings"""
         """parameters: 
         allele:string
         """

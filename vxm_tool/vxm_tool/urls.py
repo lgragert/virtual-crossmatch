@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import url
 from django.conf import settings
-from vxm_app import views_vxm, views_vxm_ua, views_vxm_alleles, views_vxm_gls, views_vxm_macs
+from vxm_app import views_vxm, views_vxm_ua, views_vxm_pua, views_vxm_alleles, views_vxm_gls, views_vxm_macs
 from rest_framework_swagger.views import get_swagger_view
 
 schema_view = get_swagger_view(title='Web services interface information for Transplanttoolbox')
@@ -40,6 +40,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('VICTORLICENSE/', views_vxm.victor_license, name="victor_license"),
     path('ags_unos/', views_vxm_ua.UNOSAgsApiView.as_view()),
+    path('pags_unos/', views_vxm_pua.PUNOSAgsApiView.as_view()),
     path('highres_alleles/', views_vxm_alleles.AllelesApiView.as_view()),
     path('gls/', views_vxm_gls.GenotypeListStringApiView.as_view()),
     path('macs/', views_vxm_macs.MultipleAlleleCodesApiView.as_view()),

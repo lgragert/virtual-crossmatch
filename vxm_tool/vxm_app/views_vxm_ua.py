@@ -21,7 +21,7 @@ class UNOSAgsApiView(generics.GenericAPIView):
     serializer_class = serializers.VICTOR_UNOSSerializer
 
     def post(self, request, format=None):
-        """Returns UNOS antigen for an allele."""
+        """Computes VXM for UNOS Ags"""
         """parameters: 
         allele:string
         """

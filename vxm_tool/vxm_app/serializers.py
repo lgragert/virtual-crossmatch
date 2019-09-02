@@ -7,6 +7,13 @@ class VICTOR_UNOSSerializer(serializers.Serializer):
 	Candidate_Unacceptable_antigens = serializers.CharField(max_length=None)
 
 
+class VICTOR_Prop_UNOSSerializer(serializers.Serializer):
+	"""Serializes a name field for testing our APIView."""
+	Donor_UNOS_Antigen_equivalents = serializers.CharField(max_length=None)
+	Donor_ethinicity = serializers.CharField(max_length=None)
+	Candidate_Unacceptable_antigens = serializers.CharField(max_length=None)
+
+
 	
 class VICTOR_AlleleSerializer(serializers.Serializer):
 	"""Serializes a name field for testing our APIView."""
